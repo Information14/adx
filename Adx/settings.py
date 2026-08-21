@@ -90,10 +90,11 @@ WSGI_APPLICATION = 'Adx.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-     'default': dj_database_url.parse(
-         'postgresql://adx_7a7z_user:gLFDEOlJ4RM1kzzpKOPSSPr1pwwebLFr@dpg-da43h8n10e5c73ao2r9g-a.oregon-postgres.render.com/adx_7a7z'
-     )
- }
+    "default": dj_database_url.parse(
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+    )
+}
 
 
 # Password validation
