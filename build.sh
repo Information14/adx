@@ -2,13 +2,13 @@
 
 set -o errexit
 
-# Collect static files
+echo "Collecting static files..."
 python manage.py collectstatic --no-input
 
-# Apply database migrations
-python manage.py migrate
+echo "Running database migrations..."
+python manage.py migrate --no-input
 
-# Create the Django superuser
+echo "Creating superuser if needed..."
 python manage.py shell <<'PY'
 import os
 from django.contrib.auth import get_user_model
@@ -16,26 +16,28 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 username = os.environ.get("DJANGO_SUPERUSER_USERNAME")
-email = os.environ.get("DJANGO_SUPERUSER_EMAIL")
+email = os.environ.get("DJANGO_SUPERUSER_EMAIL", "")
 password = os.environ.get("DJANGO_SUPERUSER_PASSWORD")
 
-if username and email and password:
+if username and password:
+    user, created = User.objects.get_or_create(
+        username=username,
+        defaults={
+            "email": email,
+            "is_staff": True,
+            "is_superuser": True,
+            "is_active": True,
+        },
+    )
 
-    if not User.objects.filter(username=username).exists():
-
-        User.objects.create_superuser(
-            username=username,
-            email=email,
-            password=password,
-        )
-
-        print(
-            f"Superuser '{username}' created."
-        )
-
+    if created:
+        user.set_password(password)
+        user.save()
+        print(f"Superuser '{username}' created successfully.")
     else:
-
-        print(
-            f"Superuser '{username}' already exists."
-        )
+        print(f"Superuser '{username}' already exists.")
+else:
+    print("Superuser environment variables are not set.")
 PY
+
+echo "Build completed successfully."
