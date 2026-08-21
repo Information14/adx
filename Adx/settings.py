@@ -63,6 +63,15 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 
 ROOT_URLCONF = 'Adx.urls'
 
@@ -132,11 +141,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "Project/static",
-]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 STATICFILES_STORAGE = (
