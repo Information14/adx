@@ -1,0 +1,1528 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+    <title>
+        Locations | Arete DeltaX
+    </title>
+
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/main.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        body {
+
+            background: #f4f7fb;
+
+            color: #172033;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .adx-navbar {
+
+            background: #111827;
+
+            border-bottom: 1px solid rgba(255,255,255,.08);
+
+            min-height: 72px;
+
+        }
+
+
+        .brand-link {
+
+            text-decoration: none;
+
+            color: #ffffff;
+
+        }
+
+
+        .brand-link:hover {
+
+            color: #ffffff;
+
+        }
+
+
+        .brand-logo {
+
+            width: 42px;
+
+            height: 42px;
+
+            object-fit: contain;
+
+            margin-right: 11px;
+
+        }
+
+
+        .brand-name {
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+        }
+
+
+        .brand-subtitle {
+
+            display: block;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+        }
+
+
+        .nav-dashboard {
+
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            padding: 9px 14px;
+
+            border-radius: 8px;
+
+            transition: .2s ease;
+
+        }
+
+
+        .nav-dashboard:hover {
+
+            background: rgba(255,255,255,.07);
+
+            color: #ffffff;
+
+        }
+
+
+        .nav-logout {
+
+            border: 0;
+
+            background: transparent;
+
+            color: #fca5a5;
+
+            padding: 9px 14px;
+
+            border-radius: 8px;
+
+            font-weight: 500;
+
+            transition: .2s ease;
+
+        }
+
+
+        .nav-logout:hover {
+
+            background: rgba(239,68,68,.10);
+
+            color: #fecaca;
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content-wrapper {
+
+            padding: 38px 0 70px;
+
+        }
+
+
+        .breadcrumb-text {
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .breadcrumb-text a {
+
+            color: #2563eb;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+        }
+
+
+        .page-title {
+
+            font-size: 30px;
+
+            font-weight: 750;
+
+            letter-spacing: -.5px;
+
+            color: #111827;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .page-subtitle {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 0;
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .btn-adx-primary {
+
+            background: #2563eb;
+
+            border: none;
+
+            color: #ffffff;
+
+            padding: 11px 17px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 5px 14px rgba(37,99,235,.18);
+
+            transition: .2s ease;
+
+        }
+
+
+        .btn-adx-primary:hover {
+
+            background: #1d4ed8;
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =====================================================
+           STAT CARDS
+        ===================================================== */
+
+        .stat-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e7ecf2;
+
+            border-radius: 15px;
+
+            padding: 21px;
+
+            height: 100%;
+
+            box-shadow:
+                0 5px 20px rgba(15,23,42,.045);
+
+            transition: .2s ease;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 28px rgba(15,23,42,.08);
+
+        }
+
+
+        .stat-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+
+        }
+
+
+        .stat-icon.blue {
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+        }
+
+
+        .stat-icon.green {
+
+            background: #ecfdf3;
+
+            color: #16a34a;
+
+        }
+
+
+        .stat-icon.red {
+
+            background: #fef2f2;
+
+            color: #dc2626;
+
+        }
+
+
+        .stat-number {
+
+            font-size: 27px;
+
+            font-weight: 750;
+
+            color: #111827;
+
+        }
+
+
+        .stat-label {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .location-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e7ecf2;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 7px 28px rgba(15,23,42,.055);
+
+        }
+
+
+        .card-header-custom {
+
+            padding: 23px 25px;
+
+            border-bottom: 1px solid #edf1f5;
+
+        }
+
+
+        .card-title {
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            color: #111827;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .card-subtitle {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           SEARCH PANEL
+        ===================================================== */
+
+        .search-panel {
+
+            padding: 20px 25px;
+
+            background: #f8fafc;
+
+            border-bottom: 1px solid #edf1f5;
+
+        }
+
+
+        .filter-label {
+
+            color: #475569;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .filter-control {
+
+            min-height: 44px;
+
+            border: 1px solid #dbe2ea;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+        }
+
+
+        .filter-control:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,.09);
+
+        }
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+        }
+
+
+        .location-table {
+
+            margin: 0;
+
+        }
+
+
+        .location-table thead th {
+
+            background: #f8fafc;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 750;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+
+            padding: 16px 20px;
+
+            border-bottom: 1px solid #e7ecf2;
+
+            white-space: nowrap;
+
+        }
+
+
+        .location-table tbody td {
+
+            padding: 18px 20px;
+
+            vertical-align: middle;
+
+            border-bottom: 1px solid #f0f3f6;
+
+            font-size: 14px;
+
+        }
+
+
+        .location-table tbody tr {
+
+            transition: .15s ease;
+
+        }
+
+
+        .location-table tbody tr:hover {
+
+            background: #f8fbff;
+
+        }
+
+
+        .location-table tbody tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        /* =====================================================
+           LOCATION
+        ===================================================== */
+
+        .location-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 11px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+
+        }
+
+
+        .location-name {
+
+            color: #172033;
+
+            font-weight: 700;
+
+        }
+
+
+        .location-description {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            max-width: 320px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =====================================================
+           ZONE
+        ===================================================== */
+
+        .zone-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        .status-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 6px 10px;
+
+            border-radius: 30px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        .status-active {
+
+            background: #ecfdf3;
+
+            color: #15803d;
+
+        }
+
+
+        .status-inactive {
+
+            background: #fef2f2;
+
+            color: #dc2626;
+
+        }
+
+
+        .status-dot {
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: currentColor;
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            padding: 75px 25px;
+
+            text-align: center;
+
+        }
+
+
+        .empty-icon {
+
+            width: 72px;
+
+            height: 72px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 31px;
+
+            margin: 0 auto 20px;
+
+        }
+
+
+        .empty-state h5 {
+
+            font-weight: 700;
+
+            color: #172033;
+
+        }
+
+
+        .empty-state p {
+
+            color: #64748b;
+
+            max-width: 430px;
+
+            margin: 0 auto 22px;
+
+        }
+
+
+        /* =====================================================
+           ALERTS
+        ===================================================== */
+
+        .adx-alert {
+
+            border: none;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 4px 14px rgba(15,23,42,.04);
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .page-footer {
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 28px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 767px) {
+
+            .content-wrapper {
+
+                padding: 25px 0 50px;
+
+            }
+
+
+            .page-title {
+
+                font-size: 25px;
+
+            }
+
+
+            .card-header-custom,
+            .search-panel {
+
+                padding: 19px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="adx-navbar">
+
+    <div class="container">
+
+        <div class="d-flex
+                    align-items-center
+                    justify-content-between
+                    py-2">
+
+
+            <!-- BRAND -->
+
+            <a
+               class="brand-link d-flex align-items-center">
+
+                <img src="{% static 'img/logo.png' %}"
+                     class="brand-logo"
+                     alt="ADX Logo">
+
+                <div>
+
+                    <span class="brand-name">
+                        Arete DeltaX
+                    </span>
+
+                    <span class="brand-subtitle">
+                        Administration Portal
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <div class="d-flex align-items-center gap-2">
+
+
+                <a href="{% url 'admin_dashboard' %}"
+                   class="nav-dashboard">
+
+                    <i class="bi bi-grid-1x2 me-1"></i>
+
+                    Dashboard
+
+                </a>
+
+
+                <form method="post"
+                      action="{% url 'logout' %}"
+                      class="m-0">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="nav-logout">
+
+                        <i class="bi bi-box-arrow-right me-1"></i>
+
+                        Logout
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="content-wrapper">
+
+    <div class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="mb-4">
+
+
+            <div class="breadcrumb-text">
+
+                <a href="{% url 'admin_dashboard' %}">
+                    Admin Dashboard
+                </a>
+
+                <span class="mx-2">
+                    /
+                </span>
+
+                Locations
+
+            </div>
+
+
+            <div class="d-flex
+                        justify-content-between
+                        align-items-end
+                        flex-wrap
+                        gap-3">
+
+
+                <div>
+
+                    <h1 class="page-title">
+
+                        <i class="bi bi-geo-alt me-2"></i>
+
+                        Location Management
+
+                    </h1>
+
+                    <p class="page-subtitle">
+
+                        Manage ADX operational locations,
+                        zones and regional assignments.
+
+                    </p>
+
+                </div>
+
+
+                <a href="{% url 'location_create' %}"
+                   class="btn btn-adx-primary">
+
+                    <i class="bi bi-plus-circle me-1"></i>
+
+                    Add Location
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MESSAGES
+        ================================================= -->
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="alert alert-{{ message.tags }}
+                            adx-alert">
+
+                    <i class="bi bi-check-circle me-2"></i>
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================= -->
+
+        <div class="row g-4 mb-4">
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <div class="stat-number">
+
+                                {{ total_locations }}
+
+                            </div>
+
+                            <div class="stat-label">
+
+                                Total Locations
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon blue">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <div class="stat-number">
+
+                                {{ active_locations }}
+
+                            </div>
+
+                            <div class="stat-label">
+
+                                Active Locations
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon green">
+
+                            <i class="bi bi-check-circle"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <div class="stat-number">
+
+                                {{ inactive_locations }}
+
+                            </div>
+
+                            <div class="stat-label">
+
+                                Inactive Locations
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon red">
+
+                            <i class="bi bi-pause-circle"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOCATION DIRECTORY
+        ================================================= -->
+
+        <div class="location-card">
+
+
+            <!-- HEADER -->
+
+            <div class="card-header-custom">
+
+                <div class="d-flex
+                            justify-content-between
+                            align-items-center
+                            flex-wrap
+                            gap-3">
+
+
+                    <div>
+
+                        <div class="card-title">
+
+                            Operational Locations
+
+                        </div>
+
+                        <p class="card-subtitle">
+
+                            View and manage all registered
+                            ADX locations and zones.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="text-muted small">
+
+                        <i class="bi bi-database me-1"></i>
+
+                        Location Records
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="search-panel">
+
+                <form method="GET">
+
+                    <div class="row g-3">
+
+
+                        <div class="col-lg-5">
+
+                            <label class="filter-label">
+
+                                Search Location
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text bg-white">
+
+                                    <i class="bi bi-search text-muted"></i>
+
+                                </span>
+
+                                <input type="text"
+                                       name="search"
+                                       value="{{ request.GET.search }}"
+                                       class="form-control filter-control"
+                                       placeholder="Search location name...">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-3">
+
+                            <label class="filter-label">
+
+                                Zone / Region
+
+                            </label>
+
+                            <input type="text"
+                                   name="zone"
+                                   value="{{ request.GET.zone }}"
+                                   class="form-control filter-control"
+                                   placeholder="e.g. North East">
+
+                        </div>
+
+
+                        <div class="col-lg-2">
+
+                            <label class="filter-label">
+
+                                Status
+
+                            </label>
+
+                            <select name="status"
+                                    class="form-select filter-control">
+
+                                <option value="">
+                                    All Status
+                                </option>
+
+                                <option value="active"
+                                    {% if request.GET.status == "active" %}
+                                        selected
+                                    {% endif %}>
+
+                                    Active
+
+                                </option>
+
+                                <option value="inactive"
+                                    {% if request.GET.status == "inactive" %}
+                                        selected
+                                    {% endif %}>
+
+                                    Inactive
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-lg-2 d-flex align-items-end">
+
+                            <button type="submit"
+                                    class="btn btn-adx-primary w-100">
+
+                                <i class="bi bi-funnel me-1"></i>
+
+                                Filter
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+
+                {% if locations %}
+
+
+                    <table class="table location-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Zone / Region
+                                </th>
+
+                                <th>
+                                    Description
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Created
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            {% for location in locations %}
+
+                                <tr>
+
+
+                                    <!-- LOCATION -->
+
+                                    <td>
+
+                                        <div class="d-flex
+                                                    align-items-center
+                                                    gap-3">
+
+
+                                            <div class="location-icon">
+
+                                                <i class="bi bi-geo-alt"></i>
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <div class="location-name">
+
+                                                    {{ location.name }}
+
+                                                </div>
+
+                                                <small class="text-muted">
+
+                                                    Operational location
+
+                                                </small>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- ZONE -->
+
+                                    <td>
+
+                                        {% if location.zone %}
+
+                                            <span class="zone-badge">
+
+                                                <i class="bi bi-map"></i>
+
+                                                {{ location.zone }}
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="text-muted">
+
+                                                Not assigned
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- DESCRIPTION -->
+
+                                    <td>
+
+                                        {% if location.description %}
+
+                                            <div class="location-description">
+
+                                                {{ location.description|truncatechars:80 }}
+
+                                            </div>
+
+                                        {% else %}
+
+                                            <span class="text-muted">
+
+                                                No description
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- STATUS -->
+
+                                    <td>
+
+                                        {% if location.is_active %}
+
+                                            <span class="status-badge status-active">
+
+                                                <span class="status-dot"></span>
+
+                                                Active
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status-badge status-inactive">
+
+                                                <span class="status-dot"></span>
+
+                                                Inactive
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- CREATED -->
+
+                                    <td>
+
+                                        <span class="text-muted">
+
+                                            {{ location.created_at|date:"M d, Y" }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
+
+
+                        </tbody>
+
+                    </table>
+
+
+                {% else %}
+
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                        </div>
+
+
+                        <h5>
+
+                            No Locations Found
+
+                        </h5>
+
+
+                        <p>
+
+                            There are currently no locations
+                            matching your search criteria.
+
+                        </p>
+
+
+                        <a href="{% url 'location_create' %}"
+                           class="btn btn-adx-primary">
+
+                            <i class="bi bi-plus-circle me-1"></i>
+
+                            Create First Location
+
+                        </a>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="page-footer">
+
+            © {% now "Y" %} Arete DeltaX ·
+            ADX Credit & Inventory Financing Management System
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

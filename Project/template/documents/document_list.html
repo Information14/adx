@@ -1,0 +1,1875 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Document Centre | Arete DeltaX</title>
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: #f5f7fb;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #263238;
+
+        }
+
+
+        /* ==================================================
+           SIDEBAR
+        ================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 260px;
+
+            height: 100vh;
+
+            background: #102a43;
+
+            color: #ffffff;
+
+            z-index: 1000;
+
+            overflow-y: auto;
+
+            transition: 0.3s;
+
+        }
+
+
+        .sidebar-brand {
+
+            height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 24px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
+        }
+
+
+        .sidebar-brand img {
+
+            height: 40px;
+
+            width: auto;
+
+            margin-right: 10px;
+
+        }
+
+
+        .sidebar-brand span {
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                22px 20px 8px;
+
+            color: #8fa9c2;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+        }
+
+
+        .sidebar-menu {
+
+            list-style: none;
+
+            padding: 0 12px;
+
+            margin: 0;
+
+        }
+
+
+        .sidebar-menu li {
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .sidebar-menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 12px 14px;
+
+            border-radius: 8px;
+
+            color: #d8e4ef;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+
+            background: #1f4e79;
+
+            color: #ffffff;
+
+        }
+
+
+        .sidebar-menu i {
+
+            font-size: 17px;
+
+            width: 22px;
+
+            text-align: center;
+
+        }
+
+
+        /* ==================================================
+           LOGOUT
+        ================================================== */
+
+        .logout-form {
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        .logout-button {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            color: #ffb4b4;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .logout-button i {
+
+            font-size: 17px;
+
+            width: 22px;
+
+            text-align: center;
+
+        }
+
+
+        .logout-button:hover {
+
+            background:
+                rgba(220,53,69,0.15);
+
+            color: #ffd0d0;
+
+        }
+
+
+        /* ==================================================
+           MAIN CONTENT
+        ================================================== */
+
+        .main-content {
+
+            margin-left: 260px;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* ==================================================
+           STICKY TOPBAR
+        ================================================== */
+
+        .topbar {
+
+            min-height: 75px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e8edf3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 14px 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 900;
+
+        }
+
+
+        .topbar-title {
+
+            min-width: 0;
+
+        }
+
+
+        .topbar-title h4 {
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #102a43;
+
+        }
+
+
+        .topbar-title small {
+
+            color: #7b8794;
+
+        }
+
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .notification {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #486581;
+
+            background: #f1f5f9;
+
+            text-decoration: none;
+
+            position: relative;
+
+        }
+
+
+        .notification-badge {
+
+            position: absolute;
+
+            top: 5px;
+
+            right: 5px;
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #e63946;
+
+        }
+
+
+        .profile-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .profile-avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #1f4e79;
+
+            color: #ffffff;
+
+            font-weight: 700;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .profile-info strong {
+
+            display: block;
+
+            font-size: 13px;
+
+        }
+
+
+        .profile-info span {
+
+            font-size: 11px;
+
+            color: #7b8794;
+
+        }
+
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .content {
+
+            padding: 30px;
+
+        }
+
+
+        /* ==================================================
+           PAGE HEADER
+        ================================================== */
+
+        .page-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .page-title {
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            color: #102a43;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .page-subtitle {
+
+            color: #7b8794;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==================================================
+           STAT CARDS
+        ================================================== */
+
+        .stat-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e8edf3;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            height: 100%;
+
+            transition: 0.2s;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(16,42,67,0.08);
+
+        }
+
+
+        .stat-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #eaf2f8;
+
+            color: #1f4e79;
+
+            font-size: 20px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .stat-number {
+
+            font-size: 27px;
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #102a43;
+
+        }
+
+
+        .stat-label {
+
+            margin: 5px 0 0;
+
+            color: #7b8794;
+
+            font-size: 13px;
+
+        }
+
+
+        /* ==================================================
+           DOCUMENT CARD
+        ================================================== */
+
+        .document-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e8edf3;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+        }
+
+
+        .document-card-header {
+
+            padding: 18px 20px;
+
+            border-bottom: 1px solid #edf1f5;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+        .document-card-header h5 {
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #102a43;
+
+        }
+
+
+        /* ==================================================
+           DOCUMENT ICON
+        ================================================== */
+
+        .document-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 10px;
+
+            background: #eaf2f8;
+
+            color: #1f4e79;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 19px;
+
+        }
+
+
+        /* ==================================================
+           TABLE
+        ================================================== */
+
+        .document-table {
+
+            margin: 0;
+
+        }
+
+
+        .document-table th {
+
+            font-size: 11px;
+
+            color: #7b8794;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            font-weight: 600;
+
+            border-bottom:
+                1px solid #edf1f5;
+
+            padding: 14px 20px;
+
+        }
+
+
+        .document-table td {
+
+            padding: 15px 20px;
+
+            vertical-align: middle;
+
+            font-size: 13px;
+
+            border-bottom:
+                1px solid #f0f2f5;
+
+        }
+
+
+        .document-table tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        /* ==================================================
+           STATUS
+        ================================================== */
+
+        .status {
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .status-pending {
+
+            background: #fff4cc;
+
+            color: #8a6d1d;
+
+        }
+
+
+        .status-verified {
+
+            background: #e8f7ee;
+
+            color: #20744a;
+
+        }
+
+
+        .status-rejected {
+
+            background: #fde8e8;
+
+            color: #b42318;
+
+        }
+
+
+        /* ==================================================
+           EMPTY STATE
+        ================================================== */
+
+        .empty-state {
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+            color: #64748b;
+
+        }
+
+
+        .empty-icon {
+
+            font-size: 55px;
+
+            color: #94a3b8;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        /* ==================================================
+           MOBILE TOGGLE
+        ================================================== */
+
+        .mobile-toggle {
+
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 22px;
+
+            color: #102a43;
+
+            padding: 0;
+
+            line-height: 1;
+
+        }
+
+
+        /* ==================================================
+           SCROLL TOP
+        ================================================== */
+
+        .scroll-top {
+
+            position: fixed;
+
+            right: 20px;
+
+            bottom: 20px;
+
+            width: 42px;
+
+            height: 42px;
+
+            background: #0d6efd;
+
+            color: #ffffff;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: all 0.3s ease;
+
+            z-index: 9999;
+
+            text-decoration: none;
+
+        }
+
+
+        .scroll-top.active {
+
+            opacity: 1;
+
+            visibility: visible;
+
+        }
+
+
+        .scroll-top:hover {
+
+            color: #ffffff;
+
+            transform: translateY(-3px);
+
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 991px) {
+
+            .sidebar {
+
+                left: -260px;
+
+            }
+
+
+            .sidebar.show {
+
+                left: 0;
+
+                box-shadow:
+                    8px 0 25px
+                    rgba(0,0,0,0.15);
+
+            }
+
+
+            .main-content {
+
+                margin-left: 0;
+
+            }
+
+
+            .mobile-toggle {
+
+                display: block;
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    12px 18px;
+
+            }
+
+
+            .content {
+
+                padding: 20px;
+
+            }
+
+
+            .profile-info {
+
+                display: none;
+
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .topbar {
+
+                min-height: 68px;
+
+            }
+
+
+            .topbar-title h4 {
+
+                font-size: 17px;
+
+            }
+
+
+            .topbar-title small {
+
+                display: none;
+
+            }
+
+
+            .content {
+
+                padding: 15px;
+
+            }
+
+
+            .page-header {
+
+                display: block;
+
+            }
+
+
+            .page-header .btn {
+
+                margin-top: 15px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+
+    <div class="sidebar-brand">
+
+        <img src="{% static 'img/logo.png' %}"
+             alt="ADX Logo">
+
+        <span>
+            Arete DeltaX
+        </span>
+
+    </div>
+
+
+    <div class="sidebar-section">
+        Workspace
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <li>
+
+            <a href="{% url 'rep_dashboard' %}">
+
+                <i class="bi bi-grid-1x2"></i>
+
+                Dashboard
+
+            </a>
+
+        </li>
+<!-- ======================================================
+     SIDEBAR
+
+
+        <li>
+
+            <a href="{% url 'customer_list' %}">
+
+                <i class="bi bi-people"></i>
+
+                Customers
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'customer_create' %}">
+
+                <i class="bi bi-person-plus"></i>
+
+                New Customer
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'application_list' %}">
+
+                <i class="bi bi-file-earmark-text"></i>
+
+                Applications
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'application_create' %}">
+
+                <i class="bi bi-plus-square"></i>
+
+                New Application
+
+            </a>
+
+        </li>
+
+====================================================== -->
+
+    </ul>
+
+
+    <div class="sidebar-section">
+        Operations
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <li>
+
+            <a href="{% url 'document_list' %}"
+               class="active">
+
+                <i class="bi bi-cloud-arrow-up"></i>
+
+                Documents
+
+            </a>
+
+        </li>
+
+<!-- ======================================================
+     SIDEBAR
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-person-vcard"></i>
+
+                Guarantors
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-shop"></i>
+
+                Suppliers
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-credit-card"></i>
+
+                Payments
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-arrow-repeat"></i>
+
+                Repayments
+
+            </a>
+
+        </li>
+====================================================== -->
+
+    </ul>
+
+
+    <!-- LOGOUT -->
+
+    <ul class="sidebar-menu mt-4">
+
+        <li>
+
+            <hr class="mx-3 border-secondary">
+
+            <form method="post"
+                  action="{% url 'logout' %}"
+                  class="logout-form">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="logout-button">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </li>
+
+    </ul>
+
+
+</aside>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+====================================================== -->
+
+<div class="main-content">
+
+
+    <!-- ==================================================
+         STICKY TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+
+        <div class="d-flex align-items-center gap-3">
+
+
+            <button class="mobile-toggle"
+                    id="mobileToggle"
+                    type="button"
+                    aria-label="Toggle navigation">
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+
+            <div class="topbar-title">
+
+                <h4>
+                    Document Centre
+                </h4>
+
+                <small>
+                    Manage supporting documents attached to financing applications.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+
+            <a class="notification"
+               aria-label="Notifications">
+
+                <i class="bi bi-bell"></i>
+
+                <span class="notification-badge"></span>
+
+            </a>
+
+
+            <div class="profile-box">
+
+                <div class="profile-avatar">
+
+                    {{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+
+                        {{ request.user.get_full_name|default:request.user.username }}
+
+                    </strong>
+
+                    <span>
+
+                        {% if request.user.is_superuser %}
+
+                            Administrator
+
+                        {% elif request.user.staff_profile.role == "rep" %}
+
+                            Representative
+
+                        {% elif request.user.staff_profile.role == "reviewer" %}
+
+                            Reviewer
+
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         CONTENT
+    ================================================== -->
+
+    <main class="content">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+
+            <div>
+
+                <div class="page-title">
+                    Document Centre
+                </div>
+
+                <div class="page-subtitle">
+
+                    Manage supporting documents attached
+                    to financing applications.
+
+                </div>
+
+            </div>
+
+
+            {% if request.user.staff_profile.role == "rep" %}
+
+                <a href="{% url 'document_create' %}"
+                   class="btn btn-primary">
+
+                    <i class="bi bi-cloud-arrow-up me-2"></i>
+
+                    Upload Document
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ==================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="row g-4 mb-4">
+
+
+            <div class="col-xl-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-files"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {{ documents|length }}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Total Documents
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-xl-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-hourglass-split"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {% with pending_count=0 %}
+
+                            {% for document in documents %}
+
+                                {% if document.status == "pending" %}
+
+                                    {% with pending_count=pending_count|add:"1" %}
+
+                                    {% endwith %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                            {{ pending_count }}
+
+                        {% endwith %}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Pending Review
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-xl-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {% with verified_count=0 %}
+
+                            {% for document in documents %}
+
+                                {% if document.status == "verified" %}
+
+                                    {% with verified_count=verified_count|add:"1" %}
+
+                                    {% endwith %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                            {{ verified_count }}
+
+                        {% endwith %}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Verified Documents
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             DOCUMENT TABLE
+        ================================================== -->
+
+        <div class="document-card">
+
+
+            <div class="document-card-header">
+
+                <h5>
+
+                    <i class="bi bi-folder2-open me-2"></i>
+
+                    Supporting Documents
+
+                </h5>
+
+
+                <span class="text-muted small">
+
+                    {{ documents|length }} document{{ documents|length|pluralize }}
+
+                </span>
+
+            </div>
+
+
+            <div class="card-body p-0">
+
+
+                {% if documents %}
+
+
+                    <div class="table-responsive">
+
+
+                        <table class="table document-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Document
+                                    </th>
+
+                                    <th>
+                                        Application
+                                    </th>
+
+                                    <th>
+                                        Type
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Uploaded
+                                    </th>
+
+                                    <th>
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                            {% for document in documents %}
+
+
+                                <tr>
+
+
+                                    <!-- DOCUMENT -->
+
+                                    <td>
+
+
+                                        <div class="d-flex align-items-center gap-3">
+
+
+                                            <div class="document-icon">
+
+                                                <i class="bi bi-file-earmark-text"></i>
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <div class="fw-bold">
+
+                                                    {{ document.title }}
+
+                                                </div>
+
+
+                                                <small class="text-muted">
+
+                                                    {{ document.file_extension }}
+
+                                                </small>
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </td>
+
+
+                                    <!-- APPLICATION -->
+
+                                    <td>
+
+                                        <a href="{% url 'application_detail' document.application.pk %}"
+                                           class="text-decoration-none fw-semibold">
+
+                                            {{ document.application.application_id }}
+
+                                        </a>
+
+
+                                        <br>
+
+
+                                        <small class="text-muted">
+
+                                            {{ document.application.customer.business_name }}
+
+                                        </small>
+
+                                    </td>
+
+
+                                    <!-- TYPE -->
+
+                                    <td>
+
+                                        {{ document.get_document_type_display }}
+
+                                    </td>
+
+
+                                    <!-- STATUS -->
+
+                                    <td>
+
+
+                                        {% if document.status == "pending" %}
+
+                                            <span class="status status-pending">
+
+                                                Pending Review
+
+                                            </span>
+
+
+                                        {% elif document.status == "verified" %}
+
+                                            <span class="status status-verified">
+
+                                                Verified
+
+                                            </span>
+
+
+                                        {% else %}
+
+                                            <span class="status status-rejected">
+
+                                                Rejected
+
+                                            </span>
+
+                                        {% endif %}
+
+
+                                    </td>
+
+
+                                    <!-- DATE -->
+
+                                    <td>
+
+                                        {{ document.created_at|date:"M d, Y" }}
+
+                                    </td>
+
+
+                                    <!-- VIEW -->
+
+                                    <td>
+
+                                        <a href="{% url 'document_detail' document.pk %}"
+                                           class="btn btn-sm btn-light">
+
+                                            <i class="bi bi-eye"></i>
+
+                                        </a>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <div class="empty-state">
+
+
+                        <div class="empty-icon">
+
+                            <i class="bi bi-folder2-open"></i>
+
+                        </div>
+
+
+                        <h5 class="fw-bold">
+
+                            No documents yet
+
+                        </h5>
+
+
+                        <p>
+
+                            Supporting documents uploaded for
+                            financing applications will appear here.
+
+                        </p>
+
+
+                        {% if request.user.staff_profile.role == "rep" %}
+
+                            <a href="{% url 'document_create' %}"
+                               class="btn btn-primary">
+
+                                <i class="bi bi-cloud-arrow-up me-2"></i>
+
+                                Upload First Document
+
+                            </a>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- ======================================================
+     SCROLL TOP
+====================================================== -->
+
+<a href="#"
+   id="scroll-top"
+   class="scroll-top"
+   aria-label="Scroll to top">
+
+    <i class="bi bi-arrow-up-short"></i>
+
+</a>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}">
+</script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
+
+    const toggle =
+        document.getElementById("mobileToggle");
+
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    if (toggle && sidebar) {
+
+
+        toggle.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle("show");
+
+            }
+        );
+
+
+        const sidebarLinks =
+            sidebar.querySelectorAll(
+                ".sidebar-menu a"
+            );
+
+
+        sidebarLinks.forEach(function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        window.innerWidth <= 991
+                    ) {
+
+                        sidebar.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       SCROLL TOP
+    ===================================================== */
+
+    const scrollTopButton =
+        document.getElementById("scroll-top");
+
+
+    if (scrollTopButton) {
+
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                if (window.scrollY > 300) {
+
+                    scrollTopButton.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    scrollTopButton.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+
+        scrollTopButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
+    }
+
+
+});
+
+</script>
+
+
+</body>
+
+</html>

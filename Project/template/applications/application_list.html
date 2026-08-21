@@ -1,0 +1,513 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Financing Applications | Arete DeltaX
+    </title>
+
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            font-family: Arial, sans-serif;
+        }
+
+        .topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e8ebf0;
+            padding: 15px 0;
+        }
+
+        .brand-logo {
+            height: 42px;
+        }
+
+        .page-wrapper {
+            padding: 35px 0;
+        }
+
+        .page-card {
+            background: #ffffff;
+            border: 1px solid #e8edf3;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .page-header {
+            padding: 28px;
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        .page-header h2 {
+            font-weight: 700;
+            color: #102a43;
+        }
+
+        .stats-card {
+            background: #ffffff;
+            border: 1px solid #e8edf3;
+            border-radius: 15px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .stats-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #edf4fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1f4f73;
+            font-size: 22px;
+        }
+
+        .application-table th {
+            color: #627d98;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            white-space: nowrap;
+        }
+
+        .application-table td {
+            vertical-align: middle;
+            padding: 16px;
+        }
+
+        .application-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .status-badge {
+            padding: 7px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-draft {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .status-submitted,
+        .status-verification,
+        .status-review {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-verified {
+            background: #cff4fc;
+            color: #055160;
+        }
+
+        .status-approved,
+        .status-completed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-declined {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .status-disbursed {
+            background: #e2d9f3;
+            color: #432874;
+        }
+
+        .empty-state {
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 55px;
+            color: #9fb3c8;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between
+                    align-items-center">
+
+            <a 
+               class="d-flex align-items-center
+                      text-decoration-none">
+
+                <img src="{% static 'img/logo.png' %}"
+                     class="brand-logo me-2"
+                     alt="ADX Logo">
+
+                <strong class="text-dark">
+                    Arete DeltaX
+                </strong>
+
+            </a>
+
+
+            <div class="d-flex gap-2">
+
+                {% if user.is_superuser %}
+
+                    <a href="{% url 'admin_dashboard' %}"
+                       class="btn btn-outline-primary btn-sm">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% elif user.staff_profile.role == "rep" %}
+
+                    <a href="{% url 'rep_dashboard' %}"
+                       class="btn btn-outline-primary btn-sm">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% elif user.staff_profile.role == "reviewer" %}
+
+                    <a href="{% url 'reviewer_dashboard' %}"
+                       class="btn btn-outline-primary btn-sm">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% endif %}
+
+
+                <form method="post"
+                      action="{% url 'logout' %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="btn btn-outline-danger btn-sm">
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Logout
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="page-wrapper">
+
+    <div class="container">
+
+
+        <!-- ==================================================
+             HEADER
+        =================================================== -->
+
+        <div class="page-card mb-4">
+
+            <div class="page-header">
+
+                <div class="d-flex justify-content-between
+                            align-items-center flex-wrap gap-3">
+
+                    <div>
+
+                        <h2 class="mb-1">
+
+                            Financing Applications
+
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Monitor, review and manage financing
+                            applications.
+
+                        </p>
+
+                    </div>
+
+
+                    {% if user.staff_profile.role == "rep" %}
+
+                        <a href="{% url 'application_create' %}"
+                           class="btn btn-primary">
+
+                            <i class="bi bi-plus-lg me-1"></i>
+
+                            New Application
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             APPLICATION TABLE
+        =================================================== -->
+
+        <div class="page-card">
+
+            <div class="table-responsive">
+
+                {% if applications %}
+
+                    <table class="table application-table
+                                  align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Application
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Requested
+                                </th>
+
+                                <th>
+                                    Approved
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Assigned Rep
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for application in applications %}
+
+                                <tr>
+
+                                    <td>
+
+                                        <strong>
+                                            {{ application.application_id }}
+                                        </strong>
+
+                                        <div class="small text-muted">
+
+                                            {{ application.created_at|date:"M d, Y" }}
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <strong>
+                                            {{ application.customer.business_name }}
+                                        </strong>
+
+                                        <div class="small text-muted">
+
+                                            {{ application.customer.customer_id }}
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ application.get_application_type_display }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ₦{{ application.requested_amount|floatformat:2 }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ₦{{ application.approved_amount|floatformat:2 }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status-badge
+                                            status-{{ application.status }}">
+
+                                            {{ application.get_status_display }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {% if application.assigned_rep %}
+
+                                            {{ application.assigned_rep.get_full_name|default:application.assigned_rep.username }}
+
+                                        {% else %}
+
+                                            <span class="text-muted">
+                                                Unassigned
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a href="{% url 'application_detail' application.pk %}"
+                                           class="btn btn-sm btn-outline-primary">
+
+                                            <i class="bi bi-eye"></i>
+
+                                            View
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                {% else %}
+
+                    <div class="empty-state">
+
+                        <i class="bi bi-file-earmark-x"></i>
+
+                        <h4 class="mt-3">
+
+                            No applications found
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            There are currently no financing
+                            applications available.
+
+                        </p>
+
+                        {% if user.staff_profile.role == "rep" %}
+
+                            <a href="{% url 'application_create' %}"
+                               class="btn btn-primary">
+
+                                Create First Application
+
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

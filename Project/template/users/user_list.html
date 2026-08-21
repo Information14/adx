@@ -1,0 +1,1793 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+    <title>
+        Staff Users | Arete DeltaX
+    </title>
+
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/main.css' %}">
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        body {
+
+            background: #f4f7fb;
+
+            color: #172033;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        .page-wrapper {
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =====================================================
+           TOP NAVBAR
+        ===================================================== */
+
+        .adx-navbar {
+
+            background: #111827;
+
+            border-bottom: 1px solid rgba(255,255,255,.08);
+
+            min-height: 72px;
+
+        }
+
+
+        .brand-link {
+
+            text-decoration: none;
+
+            color: #ffffff;
+
+        }
+
+
+        .brand-link:hover {
+
+            color: #ffffff;
+
+        }
+
+
+        .brand-logo {
+
+            width: 42px;
+
+            height: 42px;
+
+            object-fit: contain;
+
+            margin-right: 11px;
+
+        }
+
+
+        .brand-name {
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            letter-spacing: .2px;
+
+        }
+
+
+        .brand-subtitle {
+
+            font-size: 11px;
+
+            color: #94a3b8;
+
+            display: block;
+
+            margin-top: 1px;
+
+        }
+
+
+        .nav-dashboard {
+
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            padding: 9px 14px;
+
+            border-radius: 8px;
+
+            transition: .2s ease;
+
+        }
+
+
+        .nav-dashboard:hover {
+
+            color: #ffffff;
+
+            background: rgba(255,255,255,.07);
+
+        }
+
+
+        .nav-logout {
+
+            border: 0;
+
+            background: transparent;
+
+            color: #fca5a5;
+
+            padding: 9px 14px;
+
+            border-radius: 8px;
+
+            font-weight: 500;
+
+            transition: .2s ease;
+
+        }
+
+
+        .nav-logout:hover {
+
+            background: rgba(239,68,68,.10);
+
+            color: #fecaca;
+
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+        ===================================================== */
+
+        .content-wrapper {
+
+            padding: 38px 0 70px;
+
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-header {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .page-title {
+
+            font-size: 30px;
+
+            font-weight: 750;
+
+            letter-spacing: -.5px;
+
+            margin-bottom: 7px;
+
+            color: #111827;
+
+        }
+
+
+        .page-subtitle {
+
+            color: #64748b;
+
+            margin: 0;
+
+            font-size: 14px;
+
+        }
+
+
+        .breadcrumb-text {
+
+            font-size: 13px;
+
+            color: #94a3b8;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .breadcrumb-text a {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
+           PRIMARY BUTTON
+        ===================================================== */
+
+        .btn-adx-primary {
+
+            background: #2563eb;
+
+            border: none;
+
+            color: #ffffff;
+
+            padding: 11px 17px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            transition: .2s ease;
+
+            box-shadow:
+                0 5px 14px rgba(37,99,235,.18);
+
+        }
+
+
+        .btn-adx-primary:hover {
+
+            background: #1d4ed8;
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .btn-adx-outline {
+
+            background: #ffffff;
+
+            border: 1px solid #dbe2ea;
+
+            color: #475569;
+
+            padding: 10px 16px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: .2s ease;
+
+        }
+
+
+        .btn-adx-outline:hover {
+
+            background: #f8fafc;
+
+            color: #1e293b;
+
+            border-color: #cbd5e1;
+
+        }
+
+
+        /* =====================================================
+           STAT CARDS
+        ===================================================== */
+
+        .stat-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e8edf3;
+
+            border-radius: 15px;
+
+            padding: 21px;
+
+            height: 100%;
+
+            box-shadow:
+                0 5px 20px rgba(15,23,42,.045);
+
+            transition: .2s ease;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 28px rgba(15,23,42,.08);
+
+        }
+
+
+        .stat-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+
+        }
+
+
+        .stat-icon.blue {
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+        }
+
+
+        .stat-icon.green {
+
+            background: #ecfdf3;
+
+            color: #16a34a;
+
+        }
+
+
+        .stat-icon.purple {
+
+            background: #f5f3ff;
+
+            color: #7c3aed;
+
+        }
+
+
+        .stat-label {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .stat-number {
+
+            color: #111827;
+
+            font-size: 27px;
+
+            font-weight: 750;
+
+        }
+
+
+        .stat-description {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .directory-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e7ecf2;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 7px 28px rgba(15,23,42,.055);
+
+        }
+
+
+        .directory-header {
+
+            padding: 23px 25px;
+
+            border-bottom: 1px solid #edf1f5;
+
+        }
+
+
+        .directory-title {
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 4px;
+
+            color: #111827;
+
+        }
+
+
+        .directory-subtitle {
+
+            font-size: 13px;
+
+            color: #64748b;
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           FILTER PANEL
+        ===================================================== */
+
+        .filter-panel {
+
+            padding: 20px 25px;
+
+            background: #f8fafc;
+
+            border-bottom: 1px solid #edf1f5;
+
+        }
+
+
+        .filter-label {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #475569;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .filter-control {
+
+            min-height: 44px;
+
+            border: 1px solid #dbe2ea;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+        }
+
+
+        .filter-control:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,.09);
+
+        }
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+        }
+
+
+        .staff-table {
+
+            margin: 0;
+
+        }
+
+
+        .staff-table thead th {
+
+            background: #f8fafc;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 750;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+
+            padding: 16px 20px;
+
+            border-bottom: 1px solid #e7ecf2;
+
+            white-space: nowrap;
+
+        }
+
+
+        .staff-table tbody td {
+
+            padding: 17px 20px;
+
+            border-bottom: 1px solid #f0f3f6;
+
+            vertical-align: middle;
+
+            color: #334155;
+
+            font-size: 14px;
+
+        }
+
+
+        .staff-table tbody tr {
+
+            transition: .15s ease;
+
+        }
+
+
+        .staff-table tbody tr:hover {
+
+            background: #f8fbff;
+
+        }
+
+
+        .staff-table tbody tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        /* =====================================================
+           USER AVATAR
+        ===================================================== */
+
+        .user-avatar {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #dbeafe,
+                #eff6ff
+            );
+
+            color: #2563eb;
+
+            font-weight: 750;
+
+            font-size: 15px;
+
+        }
+
+
+        .user-name {
+
+            color: #172033;
+
+            font-weight: 700;
+
+        }
+
+
+        .user-username {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 2px;
+
+        }
+
+
+        /* =====================================================
+           BADGES
+        ===================================================== */
+
+        .role-badge,
+        .status-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 6px 10px;
+
+            border-radius: 30px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+        }
+
+
+        .role-rep {
+
+            background: #ecfdf3;
+
+            color: #15803d;
+
+        }
+
+
+        .role-reviewer {
+
+            background: #f5f3ff;
+
+            color: #6d28d9;
+
+        }
+
+
+        .status-active {
+
+            background: #ecfdf3;
+
+            color: #15803d;
+
+        }
+
+
+        .status-inactive {
+
+            background: #fef2f2;
+
+            color: #dc2626;
+
+        }
+
+
+        /* =====================================================
+           ACTION BUTTONS
+        ===================================================== */
+
+        .action-btn {
+
+            width: 35px;
+
+            height: 35px;
+
+            border-radius: 8px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 0;
+
+            transition: .2s ease;
+
+        }
+
+
+        .action-btn:hover {
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            padding: 75px 25px;
+
+            text-align: center;
+
+        }
+
+
+        .empty-icon {
+
+            width: 72px;
+
+            height: 72px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 31px;
+
+            margin: 0 auto 20px;
+
+        }
+
+
+        .empty-state h5 {
+
+            font-weight: 700;
+
+            color: #172033;
+
+        }
+
+
+        .empty-state p {
+
+            max-width: 430px;
+
+            margin: 0 auto 22px;
+
+            color: #64748b;
+
+        }
+
+
+        /* =====================================================
+           PAGINATION
+        ===================================================== */
+
+        .pagination .page-link {
+
+            border: 1px solid #e2e8f0;
+
+            color: #475569;
+
+            border-radius: 8px;
+
+            margin: 0 3px;
+
+            min-width: 38px;
+
+            text-align: center;
+
+        }
+
+
+        .pagination .page-item.active .page-link {
+
+            background: #2563eb;
+
+            border-color: #2563eb;
+
+            color: #ffffff;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .page-footer {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            text-align: center;
+
+            margin-top: 28px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 767px) {
+
+            .content-wrapper {
+
+                padding: 25px 0 50px;
+
+            }
+
+
+            .page-title {
+
+                font-size: 25px;
+
+            }
+
+
+            .directory-header,
+            .filter-panel {
+
+                padding: 19px;
+
+            }
+
+
+            .stat-card {
+
+                padding: 18px;
+
+            }
+
+
+            .adx-navbar {
+
+                padding: 10px 0;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="adx-navbar">
+
+    <div class="container">
+
+        <div class="d-flex
+                    align-items-center
+                    justify-content-between
+                    py-2">
+
+
+            <!-- BRAND -->
+
+            <a 
+               class="brand-link d-flex align-items-center">
+
+                <img src="{% static 'img/logo.png' %}"
+                     class="brand-logo"
+                     alt="ADX Logo">
+
+                <div>
+
+                    <span class="brand-name">
+                        Arete DeltaX
+                    </span>
+
+                    <span class="brand-subtitle">
+                        Administration Portal
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <div class="d-flex align-items-center gap-2">
+
+
+                <a href="{% url 'admin_dashboard' %}"
+                   class="nav-dashboard">
+
+                    <i class="bi bi-grid-1x2 me-1"></i>
+
+                    Dashboard
+
+                </a>
+
+
+                <form method="post"
+                      action="{% url 'logout' %}"
+                      class="m-0">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="nav-logout">
+
+                        <i class="bi bi-box-arrow-right me-1"></i>
+
+                        Logout
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="content-wrapper">
+
+    <div class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+
+            <div class="breadcrumb-text">
+
+                <a href="{% url 'admin_dashboard' %}">
+                    Admin Dashboard
+                </a>
+
+                <span class="mx-2">
+                    /
+                </span>
+
+                Staff Users
+
+            </div>
+
+
+            <div class="d-flex
+                        justify-content-between
+                        align-items-end
+                        flex-wrap
+                        gap-3">
+
+
+                <div>
+
+                    <h1 class="page-title">
+
+                        <i class="bi bi-people me-2"></i>
+
+                        Staff Users
+
+                    </h1>
+
+                    <p class="page-subtitle">
+
+                        Manage representatives and reviewers
+                        across the ADX platform.
+
+                    </p>
+
+                </div>
+
+
+                <a href="{% url 'user_create' %}"
+                   class="btn btn-adx-primary">
+
+                    <i class="bi bi-person-plus me-1"></i>
+
+                    Add Staff User
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================= -->
+
+        <div class="row g-4 mb-4">
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <div class="stat-label">
+                                Total Staff
+                            </div>
+
+                            <div class="stat-number">
+
+                                {{ staff_users.paginator.count|default:staff_users|length }}
+
+                            </div>
+
+                            <div class="stat-description">
+                                Registered staff accounts
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon blue">
+
+                            <i class="bi bi-people"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <div class="stat-label">
+                                Representatives
+                            </div>
+
+                            <div class="stat-number">
+
+                                {{ staff_users|length }}
+
+                            </div>
+
+                            <div class="stat-description">
+                                Operational field staff
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon green">
+
+                            <i class="bi bi-person-workspace"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-12">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <div class="stat-label">
+                                Staff Management
+                            </div>
+
+                            <div class="stat-number">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+
+                            <div class="stat-description">
+                                Access and account control
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon purple">
+
+                            <i class="bi bi-shield-lock"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             STAFF DIRECTORY
+        ================================================= -->
+
+        <div class="directory-card">
+
+
+            <!-- HEADER -->
+
+            <div class="directory-header">
+
+                <div class="d-flex
+                            justify-content-between
+                            align-items-center
+                            flex-wrap
+                            gap-3">
+
+
+                    <div>
+
+                        <div class="directory-title">
+
+                            Staff Directory
+
+                        </div>
+
+                        <p class="directory-subtitle">
+
+                            Representatives and reviewers
+                            with access to ADX.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="text-muted small">
+
+                        <i class="bi bi-database me-1"></i>
+
+                        Staff Records
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FILTERS -->
+
+            <div class="filter-panel">
+
+                <form method="GET">
+
+                    <div class="row g-3">
+
+
+                        <div class="col-lg-5">
+
+                            <label class="filter-label">
+
+                                Search Staff
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text bg-white">
+
+                                    <i class="bi bi-search text-muted"></i>
+
+                                </span>
+
+                                <input type="text"
+                                       name="search"
+                                       value="{{ request.GET.search }}"
+                                       class="form-control filter-control"
+                                       placeholder="Name, username or email...">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-3">
+
+                            <label class="filter-label">
+
+                                Role
+
+                            </label>
+
+                            <select name="role"
+                                    class="form-select filter-control">
+
+                                <option value="">
+                                    All Roles
+                                </option>
+
+                                <option value="rep"
+                                    {% if request.GET.role == "rep" %}
+                                        selected
+                                    {% endif %}>
+
+                                    Representative
+
+                                </option>
+
+                                <option value="reviewer"
+                                    {% if request.GET.role == "reviewer" %}
+                                        selected
+                                    {% endif %}>
+
+                                    Reviewer
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-lg-2">
+
+                            <label class="filter-label">
+
+                                Status
+
+                            </label>
+
+                            <select name="status"
+                                    class="form-select filter-control">
+
+                                <option value="">
+                                    All Statuses
+                                </option>
+
+                                <option value="active"
+                                    {% if request.GET.status == "active" %}
+                                        selected
+                                    {% endif %}>
+
+                                    Active
+
+                                </option>
+
+                                <option value="inactive"
+                                    {% if request.GET.status == "inactive" %}
+                                        selected
+                                    {% endif %}>
+
+                                    Inactive
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-lg-2 d-flex align-items-end">
+
+                            <button type="submit"
+                                    class="btn btn-adx-primary w-100">
+
+                                <i class="bi bi-funnel me-1"></i>
+
+                                Filter
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+
+                {% if staff_users %}
+
+
+                    <table class="table staff-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Staff Member
+                                </th>
+
+                                <th>
+                                    Role
+                                </th>
+
+                                <th>
+                                    Contact
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Joined
+                                </th>
+
+                                <th class="text-end">
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            {% for staff in staff_users %}
+
+                                <tr>
+
+
+                                    <!-- STAFF -->
+
+                                    <td>
+
+                                        <div class="d-flex
+                                                    align-items-center
+                                                    gap-3">
+
+
+                                            <div class="user-avatar">
+
+                                                {{ staff.first_name|first|upper }}
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <div class="user-name">
+
+                                                    {{ staff.get_full_name|default:staff.username }}
+
+                                                </div>
+
+                                                <div class="user-username">
+
+                                                    @{{ staff.username }}
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- ROLE -->
+
+                                    <td>
+
+                                        {% if staff.staff_profile.role == "rep" %}
+
+                                            <span class="role-badge role-rep">
+
+                                                <i class="bi bi-person-workspace"></i>
+
+                                                Representative
+
+                                            </span>
+
+                                        {% elif staff.staff_profile.role == "reviewer" %}
+
+                                            <span class="role-badge role-reviewer">
+
+                                                <i class="bi bi-person-check"></i>
+
+                                                Reviewer
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- CONTACT -->
+
+                                    <td>
+
+                                        {% if staff.email %}
+
+                                            <div class="fw-semibold">
+
+                                                {{ staff.email }}
+
+                                            </div>
+
+                                        {% else %}
+
+                                            <div class="text-muted">
+
+                                                No email
+
+                                            </div>
+
+                                        {% endif %}
+
+                                        <small class="text-muted">
+
+                                            {{ staff.staff_profile.phone|default:"No phone" }}
+
+                                        </small>
+
+                                    </td>
+
+
+                                    <!-- LOCATION -->
+
+                                    <td>
+
+                                        {% if staff.staff_profile.location %}
+
+                                            <span class="fw-semibold">
+
+                                                <i class="bi bi-geo-alt me-1 text-muted"></i>
+
+                                                {{ staff.staff_profile.location.name }}
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="text-muted">
+
+                                                Not assigned
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- STATUS -->
+
+                                    <td>
+
+                                        {% if staff.is_active %}
+
+                                            <span class="status-badge status-active">
+
+                                                <i class="bi bi-check-circle"></i>
+
+                                                Active
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status-badge status-inactive">
+
+                                                <i class="bi bi-x-circle"></i>
+
+                                                Inactive
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- DATE -->
+
+                                    <td>
+
+                                        <span class="text-muted">
+
+                                            {{ staff.date_joined|date:"M d, Y" }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- ACTIONS -->
+
+                                    <td class="text-end">
+
+
+                                        <a href="{% url 'user_edit' staff.pk %}"
+                                           class="btn btn-outline-primary action-btn me-1"
+                                           title="Edit Staff">
+
+                                            <i class="bi bi-pencil"></i>
+
+                                        </a>
+
+
+                                        <a href="{% url 'user_toggle_status' staff.pk %}"
+                                           class="btn {% if staff.is_active %}btn-outline-danger{% else %}btn-outline-success{% endif %} action-btn"
+                                           title="{% if staff.is_active %}Deactivate{% else %}Activate{% endif %}">
+
+                                            {% if staff.is_active %}
+
+                                                <i class="bi bi-person-slash"></i>
+
+                                            {% else %}
+
+                                                <i class="bi bi-person-check"></i>
+
+                                            {% endif %}
+
+                                        </a>
+
+
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
+
+
+                        </tbody>
+
+                    </table>
+
+
+                {% else %}
+
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+
+                            <i class="bi bi-people"></i>
+
+                        </div>
+
+                        <h5>
+
+                            No Staff Users Found
+
+                        </h5>
+
+                        <p>
+
+                            There are currently no staff accounts
+                            matching your search or filters.
+
+                        </p>
+
+                        <a href="{% url 'user_create' %}"
+                           class="btn btn-adx-primary">
+
+                            <i class="bi bi-person-plus me-1"></i>
+
+                            Create Staff User
+
+                        </a>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PAGINATION
+        ================================================= -->
+
+        {% if is_paginated %}
+
+            <div class="d-flex
+                        justify-content-center
+                        mt-4">
+
+
+                <nav>
+
+                    <ul class="pagination">
+
+
+                        {% if page_obj.has_previous %}
+
+                            <li class="page-item">
+
+                                <a class="page-link"
+                                   href="?page={{ page_obj.previous_page_number }}">
+
+                                    <i class="bi bi-chevron-left"></i>
+
+                                </a>
+
+                            </li>
+
+                        {% endif %}
+
+
+                        <li class="page-item active">
+
+                            <span class="page-link">
+
+                                {{ page_obj.number }}
+
+                            </span>
+
+                        </li>
+
+
+                        {% if page_obj.has_next %}
+
+                            <li class="page-item">
+
+                                <a class="page-link"
+                                   href="?page={{ page_obj.next_page_number }}">
+
+                                    <i class="bi bi-chevron-right"></i>
+
+                                </a>
+
+                            </li>
+
+                        {% endif %}
+
+
+                    </ul>
+
+                </nav>
+
+            </div>
+
+        {% endif %}
+
+
+
+        <div class="page-footer">
+
+            © {% now "Y" %} Arete DeltaX ·
+            ADX Credit & Inventory Financing Management System
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

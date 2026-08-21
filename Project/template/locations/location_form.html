@@ -1,0 +1,839 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+    <title>
+        Create Location | Arete DeltaX
+    </title>
+
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/main.css' %}">
+
+
+    <style>
+
+        body {
+
+            background: #f5f7fb;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #263238;
+
+        }
+
+
+        .topbar {
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e8ebf0;
+
+            padding: 14px 0;
+
+        }
+
+
+        .brand-logo {
+
+            height: 42px;
+
+            width: auto;
+
+        }
+
+
+        .brand-name {
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            color: #1d3557;
+
+            margin-left: 10px;
+
+        }
+
+
+        .page-wrapper {
+
+            padding: 45px 0 70px;
+
+        }
+
+
+        .breadcrumb-area {
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .breadcrumb-area a {
+
+            color: #1d6f42;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        .page-title {
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            color: #172b4d;
+
+        }
+
+
+        .page-subtitle {
+
+            color: #6c757d;
+
+            margin-bottom: 0;
+
+        }
+
+
+        .form-card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            border: 1px solid #e7ebf0;
+
+            box-shadow:
+                0 10px 30px rgba(
+                    31,
+                    45,
+                    61,
+                    0.08
+                );
+
+            overflow: hidden;
+
+        }
+
+
+        .form-header {
+
+            padding: 28px 32px;
+
+            border-bottom: 1px solid #edf0f4;
+
+            background: #ffffff;
+
+        }
+
+
+        .form-header-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eaf6ef;
+
+            color: #1d6f42;
+
+            font-size: 23px;
+
+            margin-right: 15px;
+
+        }
+
+
+        .form-body {
+
+            padding: 32px;
+
+        }
+
+
+        .form-label {
+
+            font-weight: 600;
+
+            color: #344054;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .form-control {
+
+            min-height: 48px;
+
+            border-radius: 10px;
+
+            border: 1px solid #d9dee7;
+
+            padding: 10px 14px;
+
+        }
+
+
+        textarea.form-control {
+
+            min-height: 130px;
+
+        }
+
+
+        .form-control:focus {
+
+            border-color: #1d6f42;
+
+            box-shadow:
+                0 0 0 3px rgba(
+                    29,
+                    111,
+                    66,
+                    0.10
+                );
+
+        }
+
+
+        .help-text {
+
+            display: block;
+
+            color: #8a94a6;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+
+        }
+
+
+        .form-check {
+
+            background: #f8fafc;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 12px;
+
+            padding: 16px 18px 16px 42px;
+
+            margin-top: 10px;
+
+        }
+
+
+        .form-check-label {
+
+            font-weight: 600;
+
+            color: #344054;
+
+        }
+
+
+        .form-actions {
+
+            border-top: 1px solid #edf0f4;
+
+            padding: 22px 32px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .btn-primary-custom {
+
+            background: #1d6f42;
+
+            border: none;
+
+            color: #ffffff;
+
+            border-radius: 10px;
+
+            padding: 12px 22px;
+
+            font-weight: 600;
+
+        }
+
+
+        .btn-primary-custom:hover {
+
+            background: #155a35;
+
+            color: #ffffff;
+
+        }
+
+
+        .btn-secondary-custom {
+
+            background: #ffffff;
+
+            color: #495057;
+
+            border: 1px solid #d9dee7;
+
+            border-radius: 10px;
+
+            padding: 12px 22px;
+
+            font-weight: 600;
+
+        }
+
+
+        .btn-secondary-custom:hover {
+
+            background: #f5f7fa;
+
+            color: #172b4d;
+
+        }
+
+
+        .error-box {
+
+            background: #fff1f2;
+
+            border: 1px solid #fecdd3;
+
+            color: #9f1239;
+
+            border-radius: 10px;
+
+            padding: 13px 16px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .required {
+
+            color: #dc3545;
+
+        }
+
+
+        .logout-link {
+
+            color: #dc3545;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        .logout-link:hover {
+
+            color: #a71d2a;
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .page-wrapper {
+
+                padding: 30px 0 50px;
+
+            }
+
+
+            .form-body,
+            .form-header {
+
+                padding: 24px;
+
+            }
+
+
+            .form-actions {
+
+                padding: 20px 24px;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+
+            .form-actions a,
+            .form-actions button {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     TOP NAVIGATION
+======================================================= -->
+
+<header class="topbar">
+
+    <div class="container">
+
+        <div class="d-flex align-items-center justify-content-between">
+
+            <a
+               class="text-decoration-none d-flex align-items-center">
+
+                <img src="{% static 'img/logo.png' %}"
+                     class="brand-logo"
+                     alt="ADX Logo">
+
+                <span class="brand-name">
+                    Arete DeltaX
+                </span>
+
+            </a>
+
+
+            <div class="d-flex align-items-center gap-4">
+
+                <a href="{% url 'admin_dashboard' %}"
+                   class="text-decoration-none">
+
+                    <i class="bi bi-grid me-1"></i>
+
+                    Dashboard
+
+                </a>
+
+
+                <form method="post"
+                      action="{% url 'logout' %}"
+                      class="m-0">
+
+                        {% csrf_token %}
+
+                        <button type="submit"
+                            class="nav-link logout-link border-0 bg-transparent w-100 text-start">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                                Logout
+
+                        </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ======================================================
+     MAIN CONTENT
+======================================================= -->
+
+<main>
+
+    <div class="container page-wrapper">
+
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb-area">
+
+            <a href="{% url 'admin_dashboard' %}">
+
+                <i class="bi bi-house-door me-1"></i>
+
+                Admin Dashboard
+
+            </a>
+
+            <span class="text-muted mx-2">
+                /
+            </span>
+
+            <span class="text-muted">
+                Create Location
+            </span>
+
+        </div>
+
+
+
+        <!-- Page Heading -->
+
+        <div class="mb-4">
+
+            <h1 class="page-title">
+                Create Location
+            </h1>
+
+            <p class="page-subtitle">
+                Add a new operational location or zone
+                to the ADX financing management system.
+            </p>
+
+        </div>
+
+
+
+        <!-- Form Card -->
+
+        <div class="form-card">
+
+
+            <!-- Header -->
+
+            <div class="form-header">
+
+                <div class="d-flex align-items-center">
+
+                    <div class="form-header-icon">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="mb-1 fw-bold">
+                            Location Information
+                        </h4>
+
+                        <p class="mb-0 text-muted">
+                            Provide the details for this
+                            operational location.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Form -->
+
+            <form method="POST"
+                  novalidate>
+
+                {% csrf_token %}
+
+
+                <div class="form-body">
+
+
+                    {% if form.non_field_errors %}
+
+                        <div class="error-box">
+
+                            {{ form.non_field_errors }}
+
+                        </div>
+
+                    {% endif %}
+
+
+
+                    <!-- Location Name -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label"
+                               for="{{ form.name.id_for_label }}">
+
+                            Location Name
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        {{ form.name }}
+
+
+                        {% if form.name.help_text %}
+
+                            <span class="help-text">
+
+                                {{ form.name.help_text }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                        {% for error in form.name.errors %}
+
+                            <div class="text-danger small mt-2">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+
+                    <!-- Zone -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label"
+                               for="{{ form.zone.id_for_label }}">
+
+                            Zone / Region
+
+                        </label>
+
+
+                        {{ form.zone }}
+
+
+                        {% if form.zone.help_text %}
+
+                            <span class="help-text">
+
+                                {{ form.zone.help_text }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                        {% for error in form.zone.errors %}
+
+                            <div class="text-danger small mt-2">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+
+                    <!-- Description -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label"
+                               for="{{ form.description.id_for_label }}">
+
+                            Description
+
+                        </label>
+
+
+                        {{ form.description }}
+
+
+                        {% if form.description.help_text %}
+
+                            <span class="help-text">
+
+                                {{ form.description.help_text }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                        {% for error in form.description.errors %}
+
+                            <div class="text-danger small mt-2">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+
+                    <!-- Status -->
+
+                    <div>
+
+                        <label class="form-label">
+                            Location Status
+                        </label>
+
+
+                        <div class="form-check">
+
+                            {{ form.is_active }}
+
+                            <label class="form-check-label"
+                                   for="{{ form.is_active.id_for_label }}">
+
+                                Active Location
+
+                            </label>
+
+
+                            <div class="help-text">
+
+                                Active locations are available
+                                for operational assignments.
+
+                            </div>
+
+                        </div>
+
+
+                        {% for error in form.is_active.errors %}
+
+                            <div class="text-danger small mt-2">
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Actions -->
+
+                <div class="form-actions">
+
+
+                    <a href="{% url 'location_list' %}"
+                       class="btn btn-secondary-custom">
+
+                        <i class="bi bi-arrow-left me-2"></i>
+
+                        Back to Locations
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="btn btn-primary-custom">
+
+                        <i class="bi bi-plus-circle me-2"></i>
+
+                        Create Location
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- ======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}">
+</script>
+
+
+</body>
+
+</html>

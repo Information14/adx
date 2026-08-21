@@ -1,0 +1,437 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% if object %}
+            Review Application
+        {% else %}
+            New Financing Application
+        {% endif %}
+        | Arete DeltaX
+    </title>
+
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            font-family: Arial, sans-serif;
+        }
+
+        .topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e8ebf0;
+            padding: 15px 0;
+        }
+
+        .brand-logo {
+            height: 42px;
+            width: auto;
+        }
+
+        .page-wrapper {
+            padding: 45px 0;
+        }
+
+        .form-card {
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid #e9edf3;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .form-header {
+            padding: 30px;
+            background: linear-gradient(
+                135deg,
+                #102a43,
+                #1f4f73
+            );
+            color: #ffffff;
+        }
+
+        .form-header h2 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            margin: 0;
+            opacity: 0.82;
+        }
+
+        .form-body {
+            padding: 35px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #243b53;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 48px;
+            border-radius: 10px;
+            border: 1px solid #d9e2ec;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #2f80ed;
+            box-shadow: 0 0 0 0.2rem rgba(47, 128, 237, 0.12);
+        }
+
+        .btn-primary-custom {
+            background: #1f4f73;
+            border: none;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-primary-custom:hover {
+            background: #163b57;
+            color: #ffffff;
+        }
+
+        .btn-light-custom {
+            background: #f0f4f8;
+            border: none;
+            color: #243b53;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .error-box {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #9f1239;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .required-star {
+            color: #dc3545;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     TOPBAR
+======================================================= -->
+
+<header class="topbar">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <a 
+               class="d-flex align-items-center text-decoration-none">
+
+                <img src="{% static 'img/logo.png' %}"
+                     class="brand-logo me-2"
+                     alt="ADX Logo">
+
+                <strong class="text-dark">
+                    Arete DeltaX
+                </strong>
+
+            </a>
+
+
+            <div class="d-flex gap-2">
+
+                {% if user.is_superuser %}
+
+                    <a href="{% url 'admin_dashboard' %}"
+                       class="btn btn-sm btn-outline-primary">
+
+                        <i class="bi bi-speedometer2 me-1"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% elif user.staff_profile.role == "rep" %}
+
+                    <a href="{% url 'rep_dashboard' %}"
+                       class="btn btn-sm btn-outline-primary">
+
+                        <i class="bi bi-speedometer2 me-1"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% elif user.staff_profile.role == "reviewer" %}
+
+                    <a href="{% url 'reviewer_dashboard' %}"
+                       class="btn btn-sm btn-outline-primary">
+
+                        <i class="bi bi-speedometer2 me-1"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% endif %}
+
+
+                <form method="post"
+                      action="{% url 'logout' %}"
+                      class="d-inline">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="btn btn-sm btn-outline-danger">
+
+                        <i class="bi bi-box-arrow-right me-1"></i>
+
+                        Logout
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ======================================================
+     PAGE
+======================================================= -->
+
+<main class="page-wrapper">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-xl-8 col-lg-9">
+
+
+                <div class="form-card">
+
+
+                    <!-- HEADER -->
+
+                    <div class="form-header">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="me-3">
+
+                                <i class="bi bi-file-earmark-text fs-1"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h2>
+
+                                    {% if object %}
+                                        Review Financing Application
+                                    {% else %}
+                                        New Financing Application
+                                    {% endif %}
+
+                                </h2>
+
+                                <p>
+
+                                    {% if object %}
+
+                                        Review the application details
+                                        and record your decision.
+
+                                    {% else %}
+
+                                        Create and submit a new
+                                        financing application.
+
+                                    {% endif %}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FORM -->
+
+                    <div class="form-body">
+
+
+                        {% if form.non_field_errors %}
+
+                            <div class="error-box">
+
+                                {{ form.non_field_errors }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <form method="POST">
+
+                            {% csrf_token %}
+
+
+                            {% for field in form %}
+
+                                <div class="mb-4">
+
+                                    <label class="form-label"
+                                           for="{{ field.id_for_label }}">
+
+                                        {{ field.label }}
+
+                                        {% if field.field.required %}
+
+                                            <span class="required-star">
+                                                *
+                                            </span>
+
+                                        {% endif %}
+
+                                    </label>
+
+
+                                    {{ field }}
+
+
+                                    {% if field.help_text %}
+
+                                        <div class="form-text">
+
+                                            {{ field.help_text }}
+
+                                        </div>
+
+                                    {% endif %}
+
+
+                                    {% for error in field.errors %}
+
+                                        <div class="text-danger small mt-1">
+
+                                            {{ error }}
+
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            {% endfor %}
+
+
+                            <div class="d-flex justify-content-between
+                                        align-items-center flex-wrap gap-2 mt-4">
+
+
+                                <a href="{% url 'application_list' %}"
+                                   class="btn-light-custom text-decoration-none">
+
+                                    <i class="bi bi-arrow-left me-1"></i>
+
+                                    Cancel
+
+                                </a>
+
+
+                                <button type="submit"
+                                        class="btn-primary-custom">
+
+                                    {% if object %}
+
+                                        <i class="bi bi-check2-circle me-1"></i>
+
+                                        Save Review
+
+                                    {% else %}
+
+                                        <i class="bi bi-send me-1"></i>
+
+                                        Create Application
+
+                                    {% endif %}
+
+                                </button>
+
+
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

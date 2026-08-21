@@ -1,0 +1,2616 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+
+
+    <!-- =====================================================
+         FAVICON
+    ====================================================== -->
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <title>
+        Reviewer Dashboard | Arete DeltaX
+    </title>
+
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <!-- =====================================================
+         AOS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{% static 'aos/aos.css' %}">
+
+
+    <style>
+
+        /* ==================================================
+           GLOBAL
+        ================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: #f5f7fb;
+
+            color: #27303f;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* ==================================================
+           PRELOADER
+        ================================================== */
+
+        #preloader {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+            z-index: 99999;
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transition:
+                opacity 0.45s ease,
+                visibility 0.45s ease;
+        }
+
+
+        #preloader.hide {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+        }
+
+
+        /* ==================================================
+           PRELOADER LOGO
+        ================================================== */
+
+        .preloader-logo {
+
+            width: 60px;
+
+            height: 60px;
+
+            object-fit: contain;
+
+            animation:
+                preloader-pulse 1.5s ease-in-out infinite;
+        }
+
+
+        @keyframes preloader-pulse {
+
+            0%,
+            100% {
+
+                transform: scale(1);
+
+                opacity: 1;
+            }
+
+            50% {
+
+                transform: scale(1.05);
+
+                opacity: 0.75;
+            }
+        }
+
+
+        /* ==================================================
+           PRELOADER SPINNER
+        ================================================== */
+
+        .preloader-spinner {
+
+            width: 38px;
+
+            height: 38px;
+
+            border: 3px solid #e8edf2;
+
+            border-top-color: #102a43;
+
+            border-right-color: #1c4966;
+
+            border-radius: 50%;
+
+            animation:
+                preloader-spin 0.8s linear infinite;
+        }
+
+
+        @keyframes preloader-spin {
+
+            from {
+
+                transform: rotate(0deg);
+
+            }
+
+            to {
+
+                transform: rotate(360deg);
+
+            }
+        }
+
+
+        /* ==================================================
+           PRELOADER TEXT
+        ================================================== */
+
+        .preloader-text {
+
+            color: #102a43;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* ==================================================
+           SIDEBAR
+        ================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 260px;
+
+            height: 100vh;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #102a43 0%,
+                    #0b1f33 100%
+                );
+
+            color: #ffffff;
+
+            z-index: 1050;
+
+            transition:
+                all 0.3s ease;
+
+            overflow-y: auto;
+        }
+
+
+        .sidebar-brand {
+
+            padding: 25px 22px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.10);
+        }
+
+
+        .sidebar-brand img {
+
+            height: 43px;
+
+            width: auto;
+
+            margin-right: 10px;
+        }
+
+
+        .sidebar-brand h5 {
+
+            margin: 0;
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+
+        .sidebar-brand small {
+
+            color:
+                rgba(255,255,255,0.65);
+
+            font-size: 11px;
+        }
+
+
+        /* ==================================================
+           PROFILE
+        ================================================== */
+
+        .profile-box {
+
+            padding: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.10);
+        }
+
+
+        .profile-avatar {
+
+            width: 44px;
+
+            height: 44px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #ffffff;
+
+            color: #102a43;
+
+            font-weight: 700;
+        }
+
+
+        .profile-name {
+
+            font-weight: 600;
+
+            font-size: 14px;
+        }
+
+
+        .profile-role {
+
+            color:
+                rgba(255,255,255,0.60);
+
+            font-size: 11px;
+        }
+
+
+        /* ==================================================
+           NAVIGATION
+        ================================================== */
+
+        .sidebar-title {
+
+            padding:
+                20px 20px 8px;
+
+            color:
+                rgba(255,255,255,0.45);
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+            font-weight: 700;
+        }
+
+
+        .sidebar-nav {
+
+            padding: 0 12px;
+        }
+
+
+        .sidebar-nav a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 4px;
+
+            color:
+                rgba(255,255,255,0.72);
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            transition: 0.25s;
+        }
+
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+
+            background:
+                rgba(255,255,255,0.10);
+
+            color: #ffffff;
+        }
+
+
+        .sidebar-nav i {
+
+            width: 20px;
+
+            font-size: 16px;
+        }
+
+
+        /* ==================================================
+           LOGOUT
+        ================================================== */
+
+        .logout-form {
+
+            margin: 0;
+
+            padding: 0;
+        }
+
+
+        .logout-button {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            color: #ffb4b4;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .logout-button i {
+
+            font-size: 17px;
+
+            width: 22px;
+
+            text-align: center;
+        }
+
+
+        .logout-button:hover {
+
+            background:
+                rgba(220,53,69,0.15);
+
+            color: #ffd0d0;
+        }
+
+
+        /* ==================================================
+           MAIN CONTENT
+        ================================================== */
+
+        .main-content {
+
+            margin-left: 260px;
+
+            min-height: 100vh;
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        /* ==================================================
+           TOPBAR
+        ================================================== */
+
+        .topbar {
+
+            height: 72px;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid #e7ebf0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        .page-title h4 {
+
+            margin: 0;
+
+            font-size: 19px;
+
+            font-weight: 700;
+        }
+
+
+        .page-title small {
+
+            color: #7c8798;
+
+            font-size: 12px;
+        }
+
+
+        .topbar-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .icon-button {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f4f6f9;
+
+            color: #52606d;
+
+            transition: 0.2s;
+        }
+
+
+        .icon-button:hover {
+
+            background: #eaf0f5;
+
+            color: #102a43;
+        }
+
+
+        .mobile-menu {
+
+            display: none;
+
+            border: none;
+
+            background: transparent;
+
+            font-size: 23px;
+
+            color: #27303f;
+        }
+
+
+        /* ==================================================
+           PAGE BODY
+        ================================================== */
+
+        .page-body {
+
+            padding: 30px;
+        }
+
+
+        /* ==================================================
+           WELCOME
+        ================================================== */
+
+        .welcome-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #102a43,
+                    #1c4966
+                );
+
+            color: #ffffff;
+
+            border-radius: 14px;
+
+            padding: 27px 30px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .welcome-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+
+            height: 190px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            right: -50px;
+
+            top: -70px;
+        }
+
+
+        .welcome-card h3 {
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+
+        .welcome-card p {
+
+            margin: 0;
+
+            color:
+                rgba(255,255,255,0.75);
+
+            max-width: 650px;
+
+            font-size: 13px;
+        }
+
+
+        /* ==================================================
+           STAT CARDS
+        ================================================== */
+
+        .stat-card {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e8edf2;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            height: 100%;
+
+            transition:
+                transform 0.25s,
+                box-shadow 0.25s;
+        }
+
+
+        .stat-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.06);
+        }
+
+
+        .stat-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eef4f8;
+
+            color: #1c4966;
+
+            font-size: 19px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .stat-number {
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            color: #102a43;
+        }
+
+
+        .stat-label {
+
+            color: #7c8798;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+        }
+
+
+        /* ==================================================
+           CONTENT CARDS
+        ================================================== */
+
+        .content-card {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e8edf2;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+        }
+
+
+        .card-header-custom {
+
+            padding:
+                18px 20px;
+
+            border-bottom:
+                1px solid #edf0f3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .card-header-custom h6 {
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #27303f;
+        }
+
+
+        .view-link {
+
+            font-size: 12px;
+
+            color: #1c4966;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+
+        .view-link:hover {
+
+            color: #102a43;
+        }
+
+
+        /* ==================================================
+           TABLE
+        ================================================== */
+
+        .table {
+
+            margin: 0;
+        }
+
+
+        .table th {
+
+            background: #fafbfc;
+
+            color: #7c8798;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+
+            font-weight: 700;
+
+            border-bottom:
+                1px solid #edf0f3;
+
+            padding: 13px 18px;
+        }
+
+
+        .table td {
+
+            padding: 14px 18px;
+
+            vertical-align: middle;
+
+            font-size: 12px;
+
+            border-bottom:
+                1px solid #f0f2f5;
+        }
+
+
+        .application-id {
+
+            font-weight: 700;
+
+            color: #1c4966;
+        }
+
+
+        .customer-name {
+
+            font-weight: 600;
+
+            color: #27303f;
+        }
+
+
+        .amount {
+
+            font-weight: 700;
+        }
+
+
+        /* ==================================================
+           STATUS BADGES
+        ================================================== */
+
+        .status-badge {
+
+            padding:
+                5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 600;
+        }
+
+
+        .status-verified {
+
+            background: #e8f6ef;
+
+            color: #19734d;
+        }
+
+
+        .status-review {
+
+            background: #fff4df;
+
+            color: #9a6900;
+        }
+
+
+        .status-approved {
+
+            background: #e6f0ff;
+
+            color: #2058a5;
+        }
+
+
+        .status-declined {
+
+            background: #fdecec;
+
+            color: #b83232;
+        }
+
+
+        .status-disbursed {
+
+            background: #eeeafd;
+
+            color: #5b45a5;
+        }
+
+
+        /* ==================================================
+           QUICK ACTIONS
+        ================================================== */
+
+        .quick-action {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px;
+
+            border:
+                1px solid #edf0f3;
+
+            border-radius: 9px;
+
+            color: #27303f;
+
+            margin-bottom: 10px;
+
+            transition: .2s;
+        }
+
+
+        .quick-action:hover {
+
+            border-color: #cfd8e3;
+
+            background: #fafcfe;
+
+            transform:
+                translateX(2px);
+        }
+
+
+        .quick-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 8px;
+
+            background: #eef4f8;
+
+            color: #1c4966;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+        }
+
+
+        .quick-action strong {
+
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .quick-action span {
+
+            font-size: 10px;
+
+            color: #8793a1;
+        }
+
+
+        /* ==================================================
+           ACTIVITY
+        ================================================== */
+
+        .activity-item {
+
+            display: flex;
+
+            gap: 12px;
+
+            padding: 14px 20px;
+
+            border-bottom:
+                1px solid #f0f2f5;
+        }
+
+
+        .activity-icon {
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: #eef4f8;
+
+            color: #1c4966;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+        }
+
+
+        .activity-item strong {
+
+            font-size: 11px;
+
+            display: block;
+        }
+
+
+        .activity-item p {
+
+            margin: 3px 0;
+
+            font-size: 10px;
+
+            color: #7c8798;
+        }
+
+
+        .activity-item small {
+
+            color: #a0a8b2;
+
+            font-size: 9px;
+        }
+
+
+        /* ==================================================
+           EMPTY STATE
+        ================================================== */
+
+        .empty-state {
+
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: #8b96a5;
+
+            font-size: 12px;
+        }
+
+
+        .empty-state i {
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+
+            display: block;
+        }
+
+
+        /* ==================================================
+           SCROLL TOP
+        ================================================== */
+
+        #scroll-top {
+
+            position: fixed;
+
+            right: 22px;
+
+            bottom: 22px;
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 8px;
+
+            background: #102a43;
+
+            color: #ffffff;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 999;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.15);
+
+            transition: 0.2s;
+        }
+
+
+        #scroll-top:hover {
+
+            background: #1c4966;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 991px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+            }
+
+
+            .sidebar.show {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .main-content {
+
+                margin-left: 0;
+            }
+
+
+            .mobile-menu {
+
+                display: block;
+            }
+
+
+            .topbar {
+
+                padding:
+                    0 18px;
+            }
+
+
+            .page-body {
+
+                padding: 20px;
+            }
+
+        }
+
+
+        @media (max-width: 575px) {
+
+            .topbar {
+
+                height: 64px;
+            }
+
+
+            .page-title h4 {
+
+                font-size: 16px;
+            }
+
+
+            .page-title small {
+
+                display: none;
+            }
+
+
+            .welcome-card {
+
+                padding: 22px;
+            }
+
+
+            .welcome-card h3 {
+
+                font-size: 18px;
+            }
+
+
+            .table-responsive {
+
+                overflow-x: auto;
+            }
+
+
+            .preloader-logo {
+
+                width: 50px;
+
+                height: 50px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     PRELOADER
+======================================================= -->
+
+<div id="preloader">
+
+    <img src="{% static 'img/logo.png' %}"
+         alt="Arete DeltaX"
+         class="preloader-logo">
+
+    <div class="preloader-spinner"></div>
+
+    <div class="preloader-text">
+
+        Loading Dashboard...
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     SIDEBAR
+======================================================= -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+
+    <!-- ==================================================
+         BRAND
+    =================================================== -->
+
+    <div class="sidebar-brand">
+
+        <div class="d-flex align-items-center">
+
+            <img src="{% static 'img/logo.png' %}"
+                 alt="ADX Logo">
+
+            <div>
+
+                <h5>
+                    Arete DeltaX
+                </h5>
+
+                <small>
+                    Financing Management System
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         PROFILE
+    =================================================== -->
+
+    <div class="profile-box">
+
+        <div class="d-flex align-items-center gap-3">
+
+            <div class="profile-avatar">
+
+                {{ request.user.first_name|first|default:request.user.username|first|upper }}
+
+            </div>
+
+            <div>
+
+                <div class="profile-name">
+
+                    {{ request.user.get_full_name|default:request.user.username }}
+
+                </div>
+
+                <div class="profile-role">
+
+                    Reviewer / Manager
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         WORKSPACE
+    =================================================== -->
+
+    <div class="sidebar-title">
+
+        Workspace
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+
+        <a href="{% url 'reviewer_dashboard' %}"
+           class="active">
+
+            <i class="bi bi-grid-1x2-fill"></i>
+
+            Dashboard
+
+        </a>
+
+
+        <a href="{% url 'reviewer_applications' %}">
+
+            <i class="bi bi-file-earmark-text"></i>
+
+            Applications
+
+        </a>
+
+
+        <a href="{% url 'reviewer_applications' %}">
+
+            <i class="bi bi-check2-square"></i>
+
+            Review Queue
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- ==================================================
+         MANAGEMENT
+    =================================================== -->
+
+    <div class="sidebar-title">
+
+        Management
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+
+        <a href="#">
+
+            <i class="bi bi-wallet2"></i>
+
+            Payment Approval
+
+        </a>
+
+
+        <a href="#">
+
+            <i class="bi bi-receipt"></i>
+
+            Transactions
+
+        </a>
+
+
+        <a href="#">
+
+            <i class="bi bi-truck"></i>
+
+            Supplier Information
+
+        </a>
+
+
+    </nav>
+
+
+    <nav class="sidebar-nav">
+
+        <hr class="mx-3 border-secondary">
+
+
+        <!-- ==================================================
+             LOGOUT
+        =================================================== -->
+
+        <form method="post"
+              action="{% url 'logout' %}"
+              class="logout-form">
+
+            {% csrf_token %}
+
+            <button type="submit"
+                    class="logout-button">
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                Logout
+
+            </button>
+
+        </form>
+
+
+    </nav>
+
+</aside>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+======================================================= -->
+
+<div class="main-content">
+
+
+    <!-- ==================================================
+         TOPBAR
+    =================================================== -->
+
+    <header class="topbar">
+
+
+        <div class="d-flex align-items-center gap-3">
+
+
+            <!-- MOBILE MENU -->
+
+            <button class="mobile-menu"
+                    id="mobileMenu"
+                    type="button"
+                    aria-label="Open menu">
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+
+            <!-- PAGE TITLE -->
+
+            <div class="page-title">
+
+                <h4>
+
+                    Reviewer Dashboard
+
+                </h4>
+
+
+                <small>
+
+                    Application review & financing operations
+
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOPBAR ACTIONS -->
+
+        <div class="topbar-actions">
+
+
+            <a href="{% url 'reviewer_applications' %}"
+               class="icon-button"
+               title="Applications">
+
+                <i class="bi bi-bell"></i>
+
+            </a>
+
+
+            <div class="d-none d-md-block">
+
+                <small class="text-muted">
+
+                    Welcome,
+
+                </small>
+
+
+                <strong style="font-size: 12px;">
+
+                    {{ request.user.first_name|default:request.user.username }}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         PAGE BODY
+    =================================================== -->
+
+    <main class="page-body">
+
+
+        <!-- ==================================================
+             WELCOME
+        =================================================== -->
+
+        <div class="welcome-card mb-4"
+             data-aos="fade-up">
+
+
+            <h3>
+
+                Welcome back,
+                {{ request.user.first_name|default:request.user.username }}.
+
+            </h3>
+
+
+            <p>
+
+                Review verified financing applications,
+                manage approval decisions and monitor
+                payment operations from one centralized
+                workspace.
+
+            </p>
+
+        </div>
+
+
+        <!-- ==================================================
+             STATISTICS
+        =================================================== -->
+
+        <div class="row g-3 mb-4">
+
+
+            <!-- VERIFIED -->
+
+            <div class="col-xl-2 col-md-4 col-6"
+                 data-aos="fade-up">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-patch-check"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {{ verified_count }}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Awaiting Review
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- REVIEW -->
+
+            <div class="col-xl-2 col-md-4 col-6"
+                 data-aos="fade-up"
+                 data-aos-delay="50">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {{ review_count }}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Under Review
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- APPROVED -->
+
+            <div class="col-xl-2 col-md-4 col-6"
+                 data-aos="fade-up"
+                 data-aos-delay="100">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {{ approved_count }}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Approved
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DECLINED -->
+
+            <div class="col-xl-2 col-md-4 col-6"
+                 data-aos="fade-up"
+                 data-aos-delay="150">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-x-circle"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {{ declined_count }}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Declined
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DISBURSED -->
+
+            <div class="col-xl-2 col-md-4 col-6"
+                 data-aos="fade-up"
+                 data-aos-delay="200">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-cash-stack"></i>
+
+                    </div>
+
+
+                    <div class="stat-number">
+
+                        {{ disbursed_count }}
+
+                    </div>
+
+
+                    <div class="stat-label">
+
+                        Disbursed
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             MAIN GRID
+        =================================================== -->
+
+        <div class="row g-4">
+
+
+            <!-- =================================================
+                 REVIEW QUEUE
+            ================================================== -->
+
+            <div class="col-xl-8">
+
+
+                <div class="content-card"
+                     data-aos="fade-up">
+
+
+                    <div class="card-header-custom">
+
+                        <h6>
+
+                            <i class="bi bi-clock-history me-2"></i>
+
+                            Applications Awaiting Review
+
+                        </h6>
+
+
+                        <a href="{% url 'reviewer_applications' %}"
+                           class="view-link">
+
+                            View All
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-responsive">
+
+
+                        {% if pending_reviews %}
+
+
+                        <table class="table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Application
+                                    </th>
+
+                                    <th>
+                                        Customer
+                                    </th>
+
+                                    <th>
+                                        Type
+                                    </th>
+
+                                    <th>
+                                        Amount
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                                {% for application in pending_reviews %}
+
+
+                                <tr>
+
+
+                                    <td>
+
+                                        <span class="application-id">
+
+                                            {{ application.application_id }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="customer-name">
+
+                                            {{ application.customer.business_name }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ application.get_application_type_display }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="amount">
+
+                                            ₦{{ application.requested_amount|floatformat:2 }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a href="{% url 'reviewer_application_review' application.pk %}"
+                                           class="btn btn-sm btn-outline-primary">
+
+                                            Review
+
+                                        </a>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                                {% endfor %}
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                        {% else %}
+
+
+                        <div class="empty-state">
+
+                            <i class="bi bi-check2-circle"></i>
+
+                            No applications are currently awaiting review.
+
+                        </div>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 QUICK ACTIONS
+            ================================================== -->
+
+            <div class="col-xl-4">
+
+
+                <div class="content-card"
+                     data-aos="fade-up">
+
+
+                    <div class="card-header-custom">
+
+                        <h6>
+
+                            Quick Actions
+
+                        </h6>
+
+                    </div>
+
+
+                    <div class="p-3">
+
+
+                        <a href="{% url 'reviewer_applications' %}"
+                           class="quick-action">
+
+
+                            <div class="quick-icon">
+
+                                <i class="bi bi-search"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    Review Applications
+
+                                </strong>
+
+
+                                <span>
+
+                                    Examine verified applications
+
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+                        <a href="{% url 'reviewer_applications' %}"
+                           class="quick-action">
+
+
+                            <div class="quick-icon">
+
+                                <i class="bi bi-check2-circle"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    Approval Decisions
+
+                                </strong>
+
+
+                                <span>
+
+                                    Approve or decline applications
+
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+                        <a href="{% url 'reviewer_applications' %}"
+                           class="quick-action">
+
+
+                            <div class="quick-icon">
+
+                                <i class="bi bi-credit-card"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    Payment Operations
+
+                                </strong>
+
+
+                                <span>
+
+                                    Manage financing payment information
+
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+                        <a href="{% url 'reviewer_applications' %}"
+                           class="quick-action">
+
+
+                            <div class="quick-icon">
+
+                                <i class="bi bi-receipt"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    Transaction History
+
+                                </strong>
+
+
+                                <span>
+
+                                    View financing transactions
+
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 RECENT APPLICATIONS
+            ================================================== -->
+
+            <div class="col-xl-8">
+
+
+                <div class="content-card"
+                     data-aos="fade-up">
+
+
+                    <div class="card-header-custom">
+
+                        <h6>
+
+                            Recent Application Activity
+
+                        </h6>
+
+
+                        <a href="{% url 'reviewer_applications' %}"
+                           class="view-link">
+
+                            View Applications
+
+                        </a>
+
+                    </div>
+
+
+                    {% if recent_applications %}
+
+
+                    <div class="table-responsive">
+
+
+                        <table class="table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Application
+                                    </th>
+
+                                    <th>
+                                        Customer
+                                    </th>
+
+                                    <th>
+                                        Requested
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                                {% for application in recent_applications %}
+
+
+                                <tr>
+
+
+                                    <td>
+
+                                        <span class="application-id">
+
+                                            {{ application.application_id }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ application.customer.business_name }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ₦{{ application.requested_amount|floatformat:2 }}
+
+                                    </td>
+
+
+                                    <td>
+
+
+                                        {% if application.status == "verified" %}
+
+
+                                            <span class="status-badge status-verified">
+
+                                                Verified
+
+                                            </span>
+
+
+                                        {% elif application.status == "review" %}
+
+
+                                            <span class="status-badge status-review">
+
+                                                Under Review
+
+                                            </span>
+
+
+                                        {% elif application.status == "approved" %}
+
+
+                                            <span class="status-badge status-approved">
+
+                                                Approved
+
+                                            </span>
+
+
+                                        {% elif application.status == "declined" %}
+
+
+                                            <span class="status-badge status-declined">
+
+                                                Declined
+
+                                            </span>
+
+
+                                        {% elif application.status == "disbursed" %}
+
+
+                                            <span class="status-badge status-disbursed">
+
+                                                Disbursed
+
+                                            </span>
+
+
+                                        {% else %}
+
+
+                                            <span class="status-badge status-review">
+
+                                                {{ application.get_status_display }}
+
+                                            </span>
+
+
+                                        {% endif %}
+
+
+                                    </td>
+
+
+                                </tr>
+
+
+                                {% endfor %}
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                    {% else %}
+
+
+                    <div class="empty-state">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                        No recent application activity.
+
+                    </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ACTIVITY
+            ================================================== -->
+
+            <div class="col-xl-4">
+
+
+                <div class="content-card"
+                     data-aos="fade-up">
+
+
+                    <div class="card-header-custom">
+
+                        <h6>
+
+                            Recent Activity
+
+                        </h6>
+
+                    </div>
+
+
+                    {% if recent_activity %}
+
+
+                        {% for activity in recent_activity %}
+
+
+                        <div class="activity-item">
+
+
+                            <div class="activity-icon">
+
+                                <i class="bi bi-activity"></i>
+
+                            </div>
+
+
+                            <div>
+
+
+                                <strong>
+
+                                    {{ activity.action }}
+
+                                </strong>
+
+
+                                <p>
+
+                                    {{ activity.description|truncatechars:70 }}
+
+                                </p>
+
+
+                                <small>
+
+                                    {{ activity.created_at|date:"M d, Y H:i" }}
+
+                                </small>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <div class="empty-state">
+
+                            <i class="bi bi-clock"></i>
+
+                            No recent activity.
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- ======================================================
+     SCROLL TOP
+======================================================= -->
+
+<a href="#"
+   id="scroll-top"
+   aria-label="Scroll to top">
+
+    <i class="bi bi-arrow-up"></i>
+
+</a>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'aos/aos.js' %}"></script>
+
+
+<script>
+
+
+    /* ==================================================
+       PRELOADER
+    ================================================== */
+
+    window.addEventListener(
+        "load",
+        function () {
+
+            const preloader =
+                document.getElementById("preloader");
+
+
+            if (preloader) {
+
+                preloader.classList.add("hide");
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
+       DOM READY
+    ================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            /* ============================================
+               AOS
+            ============================================ */
+
+            if (typeof AOS !== "undefined") {
+
+                AOS.init({
+
+                    duration: 650,
+
+                    once: true,
+
+                    offset: 40
+
+                });
+
+            }
+
+
+            /* ============================================
+               MOBILE SIDEBAR
+            ============================================ */
+
+            const mobileMenu =
+                document.getElementById("mobileMenu");
+
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+
+            if (mobileMenu && sidebar) {
+
+                mobileMenu.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.toggle("show");
+
+                    }
+                );
+
+            }
+
+
+            /* ============================================
+               CLOSE SIDEBAR AFTER CLICKING LINK
+               ON MOBILE
+            ============================================ */
+
+            if (sidebar) {
+
+                const sidebarLinks =
+                    sidebar.querySelectorAll(
+                        ".sidebar-nav a"
+                    );
+
+
+                sidebarLinks.forEach(
+                    function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+                                if (
+                                    window.innerWidth <= 991
+                                ) {
+
+                                    sidebar.classList.remove(
+                                        "show"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+
+
+            /* ============================================
+               SCROLL TOP
+            ============================================ */
+
+            const scrollTop =
+                document.getElementById("scroll-top");
+
+
+            if (scrollTop) {
+
+                window.addEventListener(
+                    "scroll",
+                    function () {
+
+                        if (window.scrollY > 300) {
+
+                            scrollTop.style.display =
+                                "flex";
+
+                        } else {
+
+                            scrollTop.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+
+                scrollTop.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        window.scrollTo({
+
+                            top: 0,
+
+                            behavior: "smooth"
+
+                        });
+
+                    }
+                );
+
+            }
+
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

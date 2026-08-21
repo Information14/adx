@@ -1,0 +1,463 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ document.title }} | ADX</title>
+
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/main.css' %}">
+
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'aos/aos.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            font-family: Inter, Arial, sans-serif;
+            color: #172033;
+        }
+
+        .page-wrapper {
+            min-height: 100vh;
+            padding: 35px 20px;
+        }
+
+        .detail-card {
+            max-width: 1050px;
+            margin: auto;
+            background: white;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px rgba(15, 23, 42, .07);
+        }
+
+        .header {
+            padding: 30px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .document-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .body {
+            padding: 30px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 18px;
+            height: 100%;
+        }
+
+        .info-label {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-weight: 700;
+        }
+
+        .status {
+            padding: 7px 13px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pending {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .verified {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .rejected {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .preview-box {
+            background: #f8fafc;
+            border-radius: 18px;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .preview-box i {
+            font-size: 60px;
+            color: #64748b;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <div class="detail-card">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="d-flex justify-content-between align-items-start gap-3">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="fw-bold mb-1">
+
+                            {{ document.title }}
+
+                        </h2>
+
+                        <div class="text-muted">
+
+                            {{ document.get_document_type_display }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                {% if document.status == "pending" %}
+
+                    <span class="status pending">
+                        Pending Review
+                    </span>
+
+                {% elif document.status == "verified" %}
+
+                    <span class="status verified">
+                        Verified
+                    </span>
+
+                {% else %}
+
+                    <span class="status rejected">
+                        Rejected
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- BODY -->
+
+        <div class="body">
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            APPLICATION
+                        </div>
+
+                        <div class="info-value">
+
+                            <a href="{% url 'application_detail' document.application.pk %}"
+                               class="text-decoration-none">
+
+                                {{ document.application.application_id }}
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            CUSTOMER
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ document.application.customer.business_name }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            DOCUMENT TYPE
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ document.get_document_type_display }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            FILE FORMAT
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ document.file_extension }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            UPLOADED BY
+                        </div>
+
+                        <div class="info-value">
+
+                            {% if document.uploaded_by %}
+
+                                {{ document.uploaded_by.get_full_name|default:document.uploaded_by.username }}
+
+                            {% else %}
+
+                                System
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            UPLOAD DATE
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ document.created_at|date:"M d, Y - H:i" }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% if document.description %}
+
+                <div class="mt-4">
+
+                    <h6 class="fw-bold">
+                        Description
+                    </h6>
+
+                    <div class="text-muted">
+
+                        {{ document.description }}
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if document.review_note %}
+
+                <div class="alert alert-warning mt-4">
+
+                    <strong>
+                        Review Note
+                    </strong>
+
+                    <br>
+
+                    {{ document.review_note }}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- FILE -->
+
+            <div class="preview-box mt-4">
+
+                <i class="bi bi-file-earmark-arrow-down mb-3"></i>
+
+                <h5 class="fw-bold">
+                    {{ document.file_name }}
+                </h5>
+
+                <p class="text-muted">
+
+                    Open the uploaded supporting document.
+
+                </p>
+
+                <a href="{{ document.file.url }}"
+                   target="_blank"
+                   class="btn btn-primary">
+
+                    <i class="bi bi-box-arrow-up-right me-2"></i>
+
+                    Open Document
+
+                </a>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="d-flex justify-content-between mt-4">
+
+                <a href="{% url 'document_list' %}"
+                   class="btn btn-light">
+
+                    <i class="bi bi-arrow-left me-2"></i>
+
+                    Back to Documents
+
+                </a>
+
+
+                {% if request.user.staff_profile.role == "rep" %}
+
+                    <a href="{% url 'document_create' %}?application={{ document.application.pk }}"
+                       class="btn btn-primary">
+
+                        <i class="bi bi-plus-lg me-2"></i>
+
+                        Upload Another
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<script src="{% static 'aos/aos.js' %}"></script>
+
+<script src="{% static 'purecounter/purecounter_vanilla.js' %}"></script>
+
+
+</body>
+
+</html>

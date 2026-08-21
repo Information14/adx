@@ -1,0 +1,753 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ application.application_id }}
+        | Arete DeltaX
+    </title>
+
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            font-family: Arial, sans-serif;
+        }
+
+        .topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e8ebf0;
+            padding: 15px 0;
+        }
+
+        .brand-logo {
+            height: 42px;
+        }
+
+        .page-wrapper {
+            padding: 35px 0;
+        }
+
+        .card-box {
+            background: #ffffff;
+            border: 1px solid #e7edf3;
+            border-radius: 17px;
+            box-shadow: 0 8px 28px rgba(0,0,0,.05);
+        }
+
+        .hero-card {
+            background: linear-gradient(
+                135deg,
+                #102a43,
+                #1f4f73
+            );
+            color: #ffffff;
+            padding: 30px;
+            border-radius: 17px;
+        }
+
+        .hero-card h1 {
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #243b53;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #edf1f5;
+            margin-bottom: 20px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: #829ab1;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: #243b53;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .status-draft {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .status-submitted,
+        .status-verification,
+        .status-review {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-verified {
+            background: #cff4fc;
+            color: #055160;
+        }
+
+        .status-approved,
+        .status-completed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-declined {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .status-disbursed {
+            background: #e2d9f3;
+            color: #432874;
+        }
+
+        .amount-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .notes-box {
+            background: #f8fafc;
+            border-left: 4px solid #1f4f73;
+            padding: 18px;
+            border-radius: 8px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between
+                    align-items-center">
+
+            <a
+               class="d-flex align-items-center
+                      text-decoration-none">
+
+                <img src="{% static 'img/logo.png' %}"
+                     class="brand-logo me-2"
+                     alt="ADX Logo">
+
+                <strong class="text-dark">
+                    Arete DeltaX
+                </strong>
+
+            </a>
+
+
+            <div class="d-flex gap-2">
+
+                {% if user.is_superuser %}
+
+                    <a href="{% url 'admin_dashboard' %}"
+                       class="btn btn-outline-primary btn-sm">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% elif user.staff_profile.role == "rep" %}
+
+                    <a href="{% url 'rep_dashboard' %}"
+                       class="btn btn-outline-primary btn-sm">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% elif user.staff_profile.role == "reviewer" %}
+
+                    <a href="{% url 'reviewer_dashboard' %}"
+                       class="btn btn-outline-primary btn-sm">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                {% endif %}
+
+
+                <form method="post"
+                      action="{% url 'logout' %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="btn btn-outline-danger btn-sm">
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Logout
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="page-wrapper">
+
+    <div class="container">
+
+
+        <!-- ==================================================
+             APPLICATION HEADER
+        =================================================== -->
+
+        <div class="hero-card mb-4">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <div class="small text-uppercase mb-2"
+                         style="letter-spacing:1px; opacity:.75;">
+
+                        Financing Application
+
+                    </div>
+
+                    <h1 class="mb-2">
+
+                        {{ application.application_id }}
+
+                    </h1>
+
+                    <p class="mb-0">
+
+                        {{ application.customer.business_name }}
+
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+
+                    <span class="status-badge
+                                 status-{{ application.status }}">
+
+                        {{ application.get_status_display }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- ==================================================
+                 CUSTOMER INFORMATION
+            =================================================== -->
+
+            <div class="col-lg-6">
+
+                <div class="card-box p-4 h-100">
+
+                    <h5 class="section-title">
+
+                        <i class="bi bi-person me-2"></i>
+
+                        Customer Information
+
+                    </h5>
+
+
+                    <div class="row g-4">
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Customer ID
+                            </div>
+
+                            <div class="info-value">
+                                {{ application.customer.customer_id }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Business
+                            </div>
+
+                            <div class="info-value">
+                                {{ application.customer.business_name }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Contact Person
+                            </div>
+
+                            <div class="info-value">
+
+                                {{ application.customer.first_name }}
+                                {{ application.customer.last_name }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Phone
+                            </div>
+
+                            <div class="info-value">
+
+                                {{ application.customer.phone }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Location
+                            </div>
+
+                            <div class="info-value">
+
+                                {{ application.customer.location|default:"Not assigned" }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Email
+                            </div>
+
+                            <div class="info-value">
+
+                                {{ application.customer.email|default:"Not provided" }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 APPLICATION INFORMATION
+            =================================================== -->
+
+            <div class="col-lg-6">
+
+                <div class="card-box p-4 h-100">
+
+                    <h5 class="section-title">
+
+                        <i class="bi bi-file-earmark-text me-2"></i>
+
+                        Financing Information
+
+                    </h5>
+
+
+                    <div class="row g-4">
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Financing Type
+                            </div>
+
+                            <div class="info-value">
+
+                                {{ application.get_application_type_display }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Application Status
+                            </div>
+
+                            <div class="info-value">
+
+                                {{ application.get_status_display }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="amount-box">
+
+                                <div class="info-label">
+                                    Requested Amount
+                                </div>
+
+                                <h5 class="mb-0">
+
+                                    ₦{{ application.requested_amount|floatformat:2 }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="amount-box">
+
+                                <div class="info-label">
+                                    Approved Amount
+                                </div>
+
+                                <h5 class="mb-0">
+
+                                    ₦{{ application.approved_amount|floatformat:2 }}
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 STAFF INFORMATION
+            =================================================== -->
+
+            <div class="col-lg-6">
+
+                <div class="card-box p-4">
+
+                    <h5 class="section-title">
+
+                        <i class="bi bi-people me-2"></i>
+
+                        Application Team
+
+                    </h5>
+
+
+                    <div class="row g-4">
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Assigned Representative
+                            </div>
+
+                            <div class="info-value">
+
+                                {% if application.assigned_rep %}
+
+                                    {{ application.assigned_rep.get_full_name|default:application.assigned_rep.username }}
+
+                                {% else %}
+
+                                    Not assigned
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-6">
+
+                            <div class="info-label">
+                                Reviewer
+                            </div>
+
+                            <div class="info-value">
+
+                                {% if application.reviewer %}
+
+                                    {{ application.reviewer.get_full_name|default:application.reviewer.username }}
+
+                                {% else %}
+
+                                    Not assigned
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 TIMELINE
+            =================================================== -->
+
+            <div class="col-lg-6">
+
+                <div class="card-box p-4">
+
+                    <h5 class="section-title">
+
+                        <i class="bi bi-clock-history me-2"></i>
+
+                        Application Timeline
+
+                    </h5>
+
+
+                    <div class="mb-3">
+
+                        <div class="info-label">
+                            Created
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ application.created_at|date:"F d, Y • h:i A" }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="info-label">
+                            Last Updated
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ application.updated_at|date:"F d, Y • h:i A" }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 NOTES
+            =================================================== -->
+
+            <div class="col-12">
+
+                <div class="card-box p-4">
+
+                    <h5 class="section-title">
+
+                        <i class="bi bi-chat-left-text me-2"></i>
+
+                        Application Notes
+
+                    </h5>
+
+
+                    {% if application.notes %}
+
+                        <div class="notes-box">
+
+                            {{ application.notes|linebreaks }}
+
+                        </div>
+
+                    {% else %}
+
+                        <p class="text-muted mb-0">
+
+                            No notes have been added to this application.
+
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ACTIONS
+            =================================================== -->
+
+            
+            <div class="col-12">
+
+                <div class="d-flex justify-content-between
+                            align-items-center
+                            flex-wrap
+                            gap-2">
+
+                    <!-- BACK -->
+
+                    <a href="{% url 'application_list' %}"
+                    class="btn btn-light">
+
+                        <i class="bi bi-arrow-left me-1"></i>
+
+                        Back to Applications
+
+                    </a>
+
+
+                    <!-- RIGHT SIDE ACTIONS -->
+
+                    <div class="d-flex align-items-center flex-wrap gap-2">
+
+
+                        <!-- UPLOAD SUPPORTING DOCUMENT -->
+
+                        <a href="{% url 'document_create' %}?application={{ application.pk }}"
+                        class="btn btn-primary">
+
+                            <i class="bi bi-cloud-arrow-up me-2"></i>
+
+                            Upload Supporting Document
+
+                        </a>
+
+
+                        <!-- ADMIN -->
+
+                        {% if user.is_superuser %}
+
+                            <a href="{% url 'application_review' application.pk %}"
+                            class="btn btn-dark">
+
+                                <i class="bi bi-pencil-square me-1"></i>
+
+                                Manage Application
+
+                            </a>
+
+
+                        <!-- REVIEWER -->
+
+                        {% elif user.staff_profile.role == "reviewer" %}
+
+                            <a href="{% url 'application_review' application.pk %}"
+                            class="btn btn-dark">
+
+                                <i class="bi bi-clipboard-check me-1"></i>
+
+                                Review Application
+
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

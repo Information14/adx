@@ -1,0 +1,746 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+
+
+    <!-- Favicon -->
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <title>
+        Staff Login | Arete DeltaX
+    </title>
+
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(10, 30, 50, 0.96),
+                    rgba(20, 65, 60, 0.94)
+                ),
+                url("{% static 'img/world-dotted-map.png' %}");
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+
+        .login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 15px;
+        }
+
+
+        .login-card {
+            width: 100%;
+            max-width: 1050px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .login-brand-panel {
+            min-height: 650px;
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(14, 67, 62, 0.96),
+                    rgba(9, 45, 70, 0.96)
+                );
+            color: #ffffff;
+        }
+
+
+        .brand-logo {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            margin-bottom: 25px;
+        }
+
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+
+        .brand-title {
+            font-size: 42px;
+            line-height: 1.15;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+
+        .brand-description {
+            font-size: 16px;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+
+        .brand-points {
+            margin-top: 30px;
+        }
+
+
+        .brand-point {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+
+        .brand-point i {
+            font-size: 20px;
+            margin-right: 12px;
+        }
+
+
+        .login-panel {
+            padding: 55px;
+            min-height: 650px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        .login-heading {
+            font-size: 30px;
+            font-weight: 700;
+            color: #17324d;
+            margin-bottom: 8px;
+        }
+
+
+        .login-subtitle {
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+
+        .form-label {
+            font-weight: 600;
+            color: #26384a;
+        }
+
+
+        .input-group-text {
+            background: #f5f7f9;
+            border-right: 0;
+            color: #527083;
+        }
+
+
+        .form-control {
+            border-left: 0;
+            min-height: 50px;
+        }
+
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #86aeb0;
+        }
+
+
+        .role-label {
+            font-weight: 600;
+            color: #26384a;
+            margin-bottom: 15px;
+        }
+
+
+        .role-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+
+        .role-option {
+            position: relative;
+        }
+
+
+        .role-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .role-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 105px;
+            padding: 15px 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #ffffff;
+            text-align: center;
+        }
+
+
+        .role-card i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #527083;
+        }
+
+
+        .role-card span {
+            font-size: 13px;
+            font-weight: 600;
+            color: #394b59;
+        }
+
+
+        .role-option input:checked + .role-card {
+            border-color: #1f756d;
+            background: #edf8f6;
+            box-shadow: 0 0 0 2px rgba(31, 117, 109, 0.08);
+        }
+
+
+        .role-option input:checked + .role-card i,
+        .role-option input:checked + .role-card span {
+            color: #1f756d;
+        }
+
+
+        .login-btn {
+            width: 100%;
+            min-height: 52px;
+            border: none;
+            border-radius: 10px;
+            background: #1f756d;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.25s ease;
+        }
+
+
+        .login-btn:hover {
+            background: #185c56;
+            color: #ffffff;
+        }
+
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: #667784;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+
+        .back-home i {
+            margin-right: 7px;
+        }
+
+
+        .back-home:hover {
+            color: #1f756d;
+        }
+
+
+        .security-note {
+            margin-top: 25px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            background: #f6f8fa;
+            color: #6b7882;
+            font-size: 12px;
+            text-align: center;
+        }
+
+
+        .alert {
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+
+        @media (max-width: 991px) {
+
+            .login-brand-panel {
+                min-height: auto;
+                padding: 40px;
+            }
+
+            .login-panel {
+                min-height: auto;
+                padding: 40px;
+            }
+
+            .brand-title {
+                font-size: 34px;
+            }
+
+        }
+
+
+        @media (max-width: 575px) {
+
+            .login-wrapper {
+                padding: 20px 10px;
+            }
+
+            .login-brand-panel,
+            .login-panel {
+                padding: 30px 22px;
+            }
+
+            .role-options {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+
+        <div class="row g-0">
+
+
+            <!-- ==================================================
+                 LEFT SIDE
+            =================================================== -->
+
+            <div class="col-lg-6">
+
+                <div class="login-brand-panel">
+
+
+                    <img src="{% static 'img/logo.png' %}"
+                         alt="Arete DeltaX Logo"
+                         class="brand-logo">
+
+
+                    <div class="brand-name">
+                        Arete DeltaX
+                    </div>
+
+
+                    <h1 class="brand-title">
+
+                        ADX Staff Portal
+
+                    </h1>
+
+
+                    <p class="brand-description">
+
+                        Secure access to the ADX Credit & Inventory
+                        Financing Management System.
+
+                    </p>
+
+
+                    <div class="brand-points">
+
+
+                        <div class="brand-point">
+
+                            <i class="bi bi-shield-check"></i>
+
+                            <span>
+                                Secure staff authentication
+                            </span>
+
+                        </div>
+
+
+                        <div class="brand-point">
+
+                            <i class="bi bi-diagram-3"></i>
+
+                            <span>
+                                Role-based dashboard access
+                            </span>
+
+                        </div>
+
+
+                        <div class="brand-point">
+
+                            <i class="bi bi-bar-chart-line"></i>
+
+                            <span>
+                                Centralized financing management
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 RIGHT SIDE
+            =================================================== -->
+
+            <div class="col-lg-6">
+
+                <div class="login-panel">
+
+
+                    <h2 class="login-heading">
+
+                        Welcome Back
+
+                    </h2>
+
+
+                    <p class="login-subtitle">
+
+                        Sign in to continue to your ADX workspace.
+
+                    </p>
+
+
+
+                    <!-- ==================================================
+                         LOGIN ERRORS
+                    =================================================== -->
+
+                    {% if form.non_field_errors %}
+
+                        <div class="alert alert-danger">
+
+                            <i class="bi bi-exclamation-circle me-2"></i>
+
+                            {% for error in form.non_field_errors %}
+
+                                {{ error }}
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+
+
+                    <form method="POST"
+                          action="{% url 'login' %}">
+
+                        {% csrf_token %}
+
+
+
+                        <!-- ==================================================
+                             ROLE
+                        =================================================== -->
+
+                        <div class="mb-4">
+
+                            <div class="role-label">
+
+                                Sign in as
+
+                            </div>
+
+
+                            <div class="role-options">
+
+
+                                <div class="role-option">
+
+                                    <input
+                                        type="radio"
+                                        name="role"
+                                        value="admin"
+                                        id="role-admin"
+                                        {% if form.role.value == 'admin' %}checked{% endif %}
+                                        required>
+
+
+                                    <label
+                                        for="role-admin"
+                                        class="role-card">
+
+                                        <i class="bi bi-person-gear"></i>
+
+                                        <span>
+                                            Admin
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+
+                                <div class="role-option">
+
+                                    <input
+                                        type="radio"
+                                        name="role"
+                                        value="rep"
+                                        id="role-rep"
+                                        {% if form.role.value == 'rep' %}checked{% endif %}>
+
+
+                                    <label
+                                        for="role-rep"
+                                        class="role-card">
+
+                                        <i class="bi bi-person-badge"></i>
+
+                                        <span>
+                                            Representative
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+
+                                <div class="role-option">
+
+                                    <input
+                                        type="radio"
+                                        name="role"
+                                        value="reviewer"
+                                        id="role-reviewer"
+                                        {% if form.role.value == 'reviewer' %}checked{% endif %}>
+
+
+                                    <label
+                                        for="role-reviewer"
+                                        class="role-card">
+
+                                        <i class="bi bi-person-check"></i>
+
+                                        <span>
+                                            Reviewer
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ==================================================
+                             USERNAME
+                        =================================================== -->
+
+                        <div class="mb-3">
+
+
+                            <label for="id_username"
+                                   class="form-label">
+
+                                Username
+
+                            </label>
+
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-person"></i>
+
+                                </span>
+
+
+                                {{ form.username }}
+
+                            </div>
+
+
+                            {% if form.username.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.username.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+
+                        <!-- ==================================================
+                             PASSWORD
+                        =================================================== -->
+
+                        <div class="mb-4">
+
+
+                            <label for="id_password"
+                                   class="form-label">
+
+                                Password
+
+                            </label>
+
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-lock"></i>
+
+                                </span>
+
+
+                                {{ form.password }}
+
+                            </div>
+
+
+                            {% if form.password.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.password.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+
+                        <!-- ==================================================
+                             LOGIN BUTTON
+                        =================================================== -->
+
+                        <button type="submit"
+                                class="login-btn">
+
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+
+                            Sign In
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <a href="{% url 'index' %}"
+                       class="back-home">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Back to ADX Homepage
+
+                    </a>
+
+
+                    <div class="security-note">
+
+                        <i class="bi bi-shield-lock me-1"></i>
+
+                        Authorized ADX personnel only.
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

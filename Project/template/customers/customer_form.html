@@ -1,0 +1,714 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="ADX Customer Registration">
+
+    <title>
+        Add Customer | ADX
+    </title>
+
+
+    <!-- Favicon -->
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <!-- AOS -->
+
+    <link rel="stylesheet"
+          href="{% static 'aos/aos.css' %}">
+
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            font-family: Arial, sans-serif;
+            color: #263238;
+        }
+
+
+        .topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+            min-height: 72px;
+        }
+
+
+        .brand-logo {
+            height: 42px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 20px;
+            color: #1d3557;
+        }
+
+
+        .page-wrapper {
+            padding: 110px 0 50px;
+        }
+
+
+        .page-title {
+            font-weight: 700;
+            color: #1d3557;
+        }
+
+
+        .page-subtitle {
+            color: #6c757d;
+        }
+
+
+        .content-card {
+            background: #ffffff;
+            border: 1px solid #e8ecf1;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .form-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #edf0f3;
+        }
+
+
+        .form-body {
+            padding: 30px;
+        }
+
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1d3557;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+        }
+
+
+        .form-label {
+            font-weight: 600;
+            color: #344054;
+            margin-bottom: 8px;
+        }
+
+
+        .form-control,
+        .form-select {
+            min-height: 48px;
+            border-radius: 10px;
+            border: 1px solid #d9dee7;
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #1d6f42;
+            box-shadow: 0 0 0 .2rem rgba(29, 111, 66, .12);
+        }
+
+
+        textarea.form-control {
+            min-height: 120px;
+        }
+
+
+        .required-mark {
+            color: #dc3545;
+        }
+
+
+        .info-box {
+            background: #f4f8f6;
+            border: 1px solid #dcebe2;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+
+        .info-box i {
+            color: #1d6f42;
+            font-size: 22px;
+        }
+
+
+        .btn-primary {
+            background: #1d6f42;
+            border-color: #1d6f42;
+            border-radius: 10px;
+            padding: 11px 22px;
+        }
+
+
+        .btn-primary:hover {
+            background: #155532;
+            border-color: #155532;
+        }
+
+
+        .btn-light-custom {
+            background: #f3f5f7;
+            border: 1px solid #e1e5ea;
+            border-radius: 10px;
+            padding: 11px 20px;
+        }
+
+
+        .status-switch {
+            background: #f8fafc;
+            border: 1px solid #e5e9ef;
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+
+        .footer-note {
+            color: #98a2b3;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP NAVIGATION
+====================================================== -->
+
+<nav class="navbar topbar fixed-top">
+
+    <div class="container-fluid container-xl">
+
+
+        <!-- BRAND -->
+
+        <a 
+           class="navbar-brand d-flex align-items-center">
+
+            <img src="{% static 'img/logo.png' %}"
+                 class="brand-logo"
+                 alt="ADX Logo">
+
+            <span class="brand-name">
+                Arete DeltaX
+            </span>
+
+        </a>
+
+
+        <!-- NAV ACTIONS -->
+
+        <div class="d-flex align-items-center gap-2">
+
+
+            <a href="{% url 'rep_dashboard' %}"
+               class="btn btn-light-custom">
+
+                <i class="bi bi-grid me-1"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <form method="post"
+                  action="{% url 'logout' %}"
+                  class="d-inline">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="btn btn-outline-danger"
+                        onclick="return confirm('Are you sure you want to logout?');">
+
+                    <i class="bi bi-box-arrow-right me-1"></i>
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="page-wrapper">
+
+    <div class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="mb-4"
+             data-aos="fade-down">
+
+            <h1 class="page-title">
+
+                <i class="bi bi-person-plus me-2"></i>
+
+                Register New Customer
+
+            </h1>
+
+            <p class="page-subtitle mb-0">
+
+                Add a customer to the ADX financing management system.
+
+            </p>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+
+        <div class="content-card"
+             data-aos="fade-up">
+
+
+            <!-- HEADER -->
+
+            <div class="form-header">
+
+                <h5 class="mb-1 fw-bold">
+
+                    Customer Information
+
+                </h5>
+
+                <p class="mb-0 text-muted">
+
+                    Provide accurate customer and business information.
+
+                </p>
+
+            </div>
+
+
+            <!-- BODY -->
+
+            <div class="form-body">
+
+
+                <!-- INFORMATION BOX -->
+
+                <div class="info-box mb-4">
+
+                    <div class="d-flex gap-3">
+
+                        <i class="bi bi-info-circle-fill"></i>
+
+                        <div>
+
+                            <strong>
+                                Registration Notice
+                            </strong>
+
+                            <p class="mb-0 mt-1 text-muted">
+
+                                Customers do not require an ADX login account.
+                                They are managed by authorized staff members
+                                throughout the financing lifecycle.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- PERSONAL INFORMATION -->
+
+                    <div class="section-title">
+
+                        Personal Information
+
+                    </div>
+
+
+                    <div class="row g-4">
+
+
+                        <!-- CUSTOMER ID -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Customer ID
+
+                                <span class="required-mark">
+                                    *
+                                </span>
+
+                            </label>
+
+                            {{ form.customer_id }}
+
+                            {% if form.customer_id.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.customer_id.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                            <small class="text-muted">
+
+                                Use a unique ADX customer identifier.
+
+                            </small>
+
+                        </div>
+
+
+                        <!-- BUSINESS NAME -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Business Name
+
+                                <span class="required-mark">
+                                    *
+                                </span>
+
+                            </label>
+
+                            {{ form.business_name }}
+
+                            {% if form.business_name.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.business_name.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- FIRST NAME -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                First Name
+
+                                <span class="required-mark">
+                                    *
+                                </span>
+
+                            </label>
+
+                            {{ form.first_name }}
+
+                            {% if form.first_name.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.first_name.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- LAST NAME -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Last Name
+
+                                <span class="required-mark">
+                                    *
+                                </span>
+
+                            </label>
+
+                            {{ form.last_name }}
+
+                            {% if form.last_name.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.last_name.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                    </div>
+
+
+                    <hr class="my-5">
+
+
+                    <!-- CONTACT INFORMATION -->
+
+                    <div class="section-title">
+
+                        Contact & Location
+
+                    </div>
+
+
+                    <div class="row g-4">
+
+
+                        <!-- PHONE -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Phone Number
+
+                                <span class="required-mark">
+                                    *
+                                </span>
+
+                            </label>
+
+                            {{ form.phone }}
+
+                            {% if form.phone.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.phone.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Email Address
+
+                            </label>
+
+                            {{ form.email }}
+
+                            {% if form.email.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.email.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- LOCATION -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Operating Location
+
+                            </label>
+
+                            {{ form.location }}
+
+                            {% if form.location.errors %}
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ form.location.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Customer Status
+
+                            </label>
+
+                            <div class="status-switch">
+
+                                <div class="form-check">
+
+                                    {{ form.is_active }}
+
+                                    <label class="form-check-label">
+
+                                        Active Customer
+
+                                    </label>
+
+                                </div>
+
+                                <small class="text-muted">
+
+                                    Active customers can participate in
+                                    the financing workflow.
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- FORM ACTIONS -->
+
+                    <div class="d-flex justify-content-between
+                                align-items-center mt-5 pt-4
+                                border-top">
+
+
+                        <a href="{% url 'customer_list' %}"
+                           class="btn btn-light-custom">
+
+                            <i class="bi bi-arrow-left me-1"></i>
+
+                            Back to Customers
+
+                        </a>
+
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            <i class="bi bi-person-check me-1"></i>
+
+                            Register Customer
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="text-center mt-4 footer-note">
+
+            ADX Credit & Inventory Financing Management System
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'aos/aos.js' %}"></script>
+
+<script>
+
+    AOS.init({
+        duration: 700,
+        once: true
+    });
+
+</script>
+
+
+</body>
+
+</html>

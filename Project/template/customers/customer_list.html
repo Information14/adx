@@ -1,0 +1,784 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Customers | ADX
+    </title>
+
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            color: #263238;
+            font-family: Arial, sans-serif;
+        }
+
+
+        .topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e7ebf0;
+            min-height: 72px;
+        }
+
+
+        .brand-logo {
+            height: 42px;
+            margin-right: 10px;
+        }
+
+
+        .brand-name {
+            color: #1d3557;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+
+        .page-wrapper {
+            padding: 110px 0 50px;
+        }
+
+
+        .page-title {
+            color: #1d3557;
+            font-weight: 700;
+        }
+
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e8ecf1;
+            border-radius: 16px;
+            padding: 20px;
+            height: 100%;
+            box-shadow: 0 8px 25px rgba(0,0,0,.04);
+        }
+
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef6f1;
+            color: #1d6f42;
+            font-size: 21px;
+        }
+
+
+        .stat-number {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1d3557;
+        }
+
+
+        .content-card {
+            background: #ffffff;
+            border: 1px solid #e8ecf1;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0,0,0,.05);
+            overflow: hidden;
+        }
+
+
+        .table-header {
+            padding: 22px 25px;
+            border-bottom: 1px solid #edf0f3;
+        }
+
+
+        .table-responsive {
+            min-height: 250px;
+        }
+
+
+        .table {
+            margin-bottom: 0;
+        }
+
+
+        .table thead th {
+            background: #f8fafc;
+            color: #667085;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 15px;
+            border-bottom: 1px solid #e6e9ee;
+        }
+
+
+        .table tbody td {
+            padding: 17px 15px;
+            vertical-align: middle;
+            border-color: #f0f2f5;
+        }
+
+
+        .customer-name {
+            font-weight: 700;
+            color: #1d3557;
+        }
+
+
+        .customer-id {
+            font-size: 12px;
+            color: #667085;
+        }
+
+
+        .status-badge {
+            padding: 7px 11px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        .status-active {
+            background: #e9f7ef;
+            color: #16734a;
+        }
+
+
+        .status-inactive {
+            background: #f1f3f5;
+            color: #667085;
+        }
+
+
+        .btn-primary {
+            background: #1d6f42;
+            border-color: #1d6f42;
+            border-radius: 9px;
+        }
+
+
+        .btn-primary:hover {
+            background: #155532;
+        }
+
+
+        .btn-light-custom {
+            background: #f3f5f7;
+            border: 1px solid #e1e5ea;
+            border-radius: 9px;
+        }
+
+
+        .empty-state {
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+
+        .empty-icon {
+            font-size: 55px;
+            color: #c7ced7;
+        }
+
+
+        .pagination .page-link {
+            color: #1d6f42;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<nav class="navbar topbar fixed-top">
+
+    <div class="container-fluid container-xl">
+
+
+        <a 
+           class="navbar-brand d-flex align-items-center">
+
+            <img src="{% static 'img/logo.png' %}"
+                 class="brand-logo"
+                 alt="ADX Logo">
+
+            <span class="brand-name">
+                Arete DeltaX
+            </span>
+
+        </a>
+
+
+        <div class="d-flex gap-2">
+
+
+            {% if request.user.is_superuser %}
+
+                <a href="{% url 'admin_dashboard' %}"
+                   class="btn btn-light-custom">
+
+                    <i class="bi bi-grid me-1"></i>
+
+                    Admin Dashboard
+
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'rep_dashboard' %}"
+                   class="btn btn-light-custom">
+
+                    <i class="bi bi-grid me-1"></i>
+
+                    Rep Dashboard
+
+                </a>
+
+            {% endif %}
+
+
+            <form method="post"
+                  action="{% url 'logout' %}"
+                  class="d-inline">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="btn btn-outline-danger"
+                        onclick="return confirm('Are you sure you want to logout?');">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="page-wrapper">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="d-flex flex-wrap justify-content-between
+                    align-items-center gap-3 mb-4">
+
+
+            <div>
+
+                <h1 class="page-title mb-1">
+
+                    <i class="bi bi-people me-2"></i>
+
+                    Customers
+
+                </h1>
+
+                <p class="text-muted mb-0">
+
+                    Manage and monitor customers registered within ADX.
+
+                </p>
+
+            </div>
+
+
+            {% if not request.user.is_superuser %}
+
+                <a href="{% url 'customer_create' %}"
+                   class="btn btn-primary px-3">
+
+                    <i class="bi bi-person-plus me-1"></i>
+
+                    New Customer
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="row g-4 mb-4">
+
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-center">
+
+                        <div>
+
+                            <div class="text-muted small mb-1">
+                                Total Customers
+                            </div>
+
+                            <div class="stat-number">
+
+                                {{ total_customers }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon">
+
+                            <i class="bi bi-people"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-center">
+
+                        <div>
+
+                            <div class="text-muted small mb-1">
+                                Active Customers
+                            </div>
+
+                            <div class="stat-number">
+
+                                {{ active_customers }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon">
+
+                            <i class="bi bi-person-check"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-center">
+
+                        <div>
+
+                            <div class="text-muted small mb-1">
+                                Inactive Customers
+                            </div>
+
+                            <div class="stat-number">
+
+                                {{ inactive_customers }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon">
+
+                            <i class="bi bi-person-dash"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CUSTOMER TABLE
+        ================================================== -->
+
+        <div class="content-card">
+
+
+            <div class="table-header">
+
+                <h5 class="mb-1 fw-bold">
+
+                    Customer Directory
+
+                </h5>
+
+                <p class="text-muted small mb-0">
+
+                    Customer records and registration information.
+
+                </p>
+
+            </div>
+
+
+            {% if customers %}
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Business
+                                </th>
+
+                                <th>
+                                    Phone
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                {% if request.user.is_superuser %}
+
+                                    <th>
+                                        Registered By
+                                    </th>
+
+                                {% endif %}
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th class="text-end">
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for customer in customers %}
+
+                                <tr>
+
+
+                                    <td>
+
+                                        <div class="customer-name">
+
+                                            {{ customer.full_name }}
+
+                                        </div>
+
+                                        <div class="customer-id">
+
+                                            {{ customer.customer_id }}
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ customer.business_name }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {{ customer.phone }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {% if customer.location %}
+
+                                            {{ customer.location.name }}
+
+                                        {% else %}
+
+                                            <span class="text-muted">
+                                                Not assigned
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    {% if request.user.is_superuser %}
+
+                                        <td>
+
+                                            {% if customer.registered_by %}
+
+                                                {{ customer.registered_by.username }}
+
+                                            {% else %}
+
+                                                <span class="text-muted">
+                                                    System
+                                                </span>
+
+                                            {% endif %}
+
+                                        </td>
+
+                                    {% endif %}
+
+
+                                    <td>
+
+                                        {% if customer.is_active %}
+
+                                            <span class="status-badge status-active">
+
+                                                <i class="bi bi-check-circle me-1"></i>
+
+                                                Active
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status-badge status-inactive">
+
+                                                <i class="bi bi-dash-circle me-1"></i>
+
+                                                Inactive
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td class="text-end">
+
+                                        <a href="{% url 'customer_detail' customer.pk %}"
+                                           class="btn btn-sm btn-outline-secondary">
+
+                                            <i class="bi bi-eye me-1"></i>
+
+                                            View
+
+                                        </a>
+
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- PAGINATION -->
+
+                {% if is_paginated %}
+
+                    <div class="p-3 border-top">
+
+                        <nav>
+
+                            <ul class="pagination
+                                       justify-content-center
+                                       mb-0">
+
+
+                                {% if page_obj.has_previous %}
+
+                                    <li class="page-item">
+
+                                        <a class="page-link"
+                                           href="?page={{ page_obj.previous_page_number }}">
+
+                                            Previous
+
+                                        </a>
+
+                                    </li>
+
+                                {% endif %}
+
+
+                                <li class="page-item active">
+
+                                    <span class="page-link">
+
+                                        Page {{ page_obj.number }}
+                                        of {{ page_obj.paginator.num_pages }}
+
+                                    </span>
+
+                                </li>
+
+
+                                {% if page_obj.has_next %}
+
+                                    <li class="page-item">
+
+                                        <a class="page-link"
+                                           href="?page={{ page_obj.next_page_number }}">
+
+                                            Next
+
+                                        </a>
+
+                                    </li>
+
+                                {% endif %}
+
+
+                            </ul>
+
+                        </nav>
+
+                    </div>
+
+                {% endif %}
+
+
+            {% else %}
+
+
+                <div class="empty-state">
+
+                    <div class="empty-icon mb-3">
+
+                        <i class="bi bi-people"></i>
+
+                    </div>
+
+                    <h5 class="fw-bold">
+
+                        No Customers Found
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        There are currently no customer records
+                        available for your account.
+
+                    </p>
+
+
+                    {% if not request.user.is_superuser %}
+
+                        <a href="{% url 'customer_create' %}"
+                           class="btn btn-primary">
+
+                            <i class="bi bi-person-plus me-1"></i>
+
+                            Register Customer
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+
+</body>
+
+</html>

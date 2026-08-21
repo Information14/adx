@@ -1,0 +1,2379 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <title>
+        ADX Credit & Inventory Financing Management System
+    </title>
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/main.css' %}">
+
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'aos/aos.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+      @media (max-width: 1199px) {
+
+        .navmenu ul {
+            background: transparent !important;
+        }
+
+        .navmenu a,
+        .navmenu a:focus {
+            color: #ffffff !important;
+            
+        }
+
+        .mobile-nav-toggle {
+            color: #ffffff !important;
+        }
+
+    }
+    </style> 
+
+</head>
+
+
+<body class="index-page">
+
+
+<!-- =========================
+     HEADER / NAVIGATION
+========================== -->
+
+<header id="header"
+        class="header d-flex align-items-center fixed-top">
+
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+
+        <!-- Brand -->
+
+        <a href="{% url 'index' %}"
+           class="logo d-flex align-items-center me-auto">
+
+            <img src="{% static 'img/logo.png' %}"
+                 alt="ADX Logo"
+                 style="height: 48px; width: auto; margin-right: 10px;">
+
+            <h1 class="sitename">
+                Arete DeltaX
+            </h1>
+
+        </a>
+
+
+        <!-- Navigation -->
+
+        <nav id="navmenu"
+             class="navmenu">
+
+            <ul>
+
+
+                <!-- Home -->
+
+                <li>
+
+                    <a href="{% url 'index' %}"
+                       class="active"
+                       data-scroll="hero">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <!-- About -->
+
+                <li>
+
+                    <a href="{% url 'index' %}"
+                       data-scroll="about">
+
+                        About ADX
+
+                    </a>
+
+                </li>
+
+
+                <!-- Solutions -->
+
+                <li>
+
+                    <a href="{% url 'index' %}"
+                       data-scroll="services">
+
+                        Solutions
+
+                    </a>
+
+                </li>
+
+
+                <!-- How It Works -->
+
+                <li>
+
+                    <a href="{% url 'index' %}"
+                       data-scroll="how-it-works">
+
+                        How It Works
+
+                    </a>
+
+                </li>
+
+
+                <!-- Why ADX -->
+
+                <li>
+
+                    <a href="{% url 'index' %}"
+                       data-scroll="features">
+
+                        Why ADX
+
+                    </a>
+
+                </li>
+
+
+                <!-- FAQs -->
+
+                <li>
+
+                    <a href="{% url 'index' %}"
+                       data-scroll="faq">
+
+                        FAQs
+
+                    </a>
+
+                </li>
+
+
+                <!-- Contact -->
+
+                <li>
+
+                    <a href="{% url 'index' %}"
+                       data-scroll="contact">
+
+                        Contact
+
+                    </a>
+
+                </li>
+
+
+                <!-- Staff Login -->
+
+                <li>
+
+                    <a href="{% url 'login' %}">
+
+                        Staff Login
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main class="main">
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section id="hero"
+             class="hero section dark-background">
+
+
+        <img src="{% static 'img/world-dotted-map.png' %}"
+             alt=""
+             class="hero-bg"
+             data-aos="fade-in">
+
+
+        <div class="container">
+
+            <div class="row gy-5 d-flex justify-content-between align-items-center">
+
+
+                <!-- Hero Content -->
+
+                <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+
+
+                    <span class="text-uppercase fw-bold mb-3"
+                          data-aos="fade-up"
+                          style="letter-spacing: 2px;">
+
+                        Arete DeltaX
+
+                    </span>
+
+
+                    <h2 data-aos="fade-up"
+                        data-aos-delay="100">
+
+                        Financing Growth Across Agricultural Value Chains
+
+                    </h2>
+
+
+                    <p data-aos="fade-up"
+                       data-aos-delay="200">
+
+                        ADX provides structured credit and inventory financing
+                        solutions that help businesses access the resources they
+                        need to grow, manage inventory and strengthen their
+                        position within agricultural value chains and markets.
+
+                    </p>
+
+
+                    <div class="d-flex flex-wrap gap-3 mt-3"
+                         data-aos="fade-up"
+                         data-aos-delay="300">
+
+
+                        <!-- Explore Solutions -->
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services"
+                           class="btn btn-primary px-4 py-3">
+
+                            Explore Our Solutions
+
+                        </a>
+
+
+                        <!-- How It Works -->
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="how-it-works"
+                           class="btn btn-outline-light px-4 py-3">
+
+                            How It Works
+
+                        </a>
+
+
+                    </div>
+
+
+
+                    <!-- Key Statistics -->
+
+                    <div class="row gy-4 mt-4"
+                         data-aos="fade-up"
+                         data-aos-delay="400">
+
+
+                        <div class="col-lg-4 col-6">
+
+                            <div class="stats-item text-center w-100 h-100">
+
+                                <span
+                                    data-purecounter-start="0"
+                                    data-purecounter-end="100"
+                                    data-purecounter-duration="1"
+                                    class="purecounter">
+
+                                    100
+
+                                </span>
+
+                                <p>
+                                    Value Chain Focus
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-lg-4 col-6">
+
+                            <div class="stats-item text-center w-100 h-100">
+
+                                <span
+                                    data-purecounter-start="0"
+                                    data-purecounter-end="24"
+                                    data-purecounter-duration="1"
+                                    class="purecounter">
+
+                                    24
+
+                                </span>
+
+                                <p>
+                                    Process Monitoring
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-lg-4 col-6">
+
+                            <div class="stats-item text-center w-100 h-100">
+
+                                <span
+                                    data-purecounter-start="0"
+                                    data-purecounter-end="360"
+                                    data-purecounter-duration="1"
+                                    class="purecounter">
+
+                                    360
+
+                                </span>
+
+                                <p>
+                                    Portfolio Visibility
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Hero Image -->
+
+                <div class="col-lg-5 order-1 order-lg-2 hero-img"
+                     data-aos="zoom-out">
+
+                    <img src="{% static 'img/hero-img.svg' %}"
+                         class="img-fluid mb-3 mb-lg-0"
+                         alt="ADX Financing Management System">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         INTRO / QUICK SERVICES
+    ========================== -->
+
+    <section id="featured-services"
+             class="featured-services section">
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+
+                <!-- Credit Financing -->
+
+                <div class="col-lg-4 col-md-6 service-item d-flex"
+                     data-aos="fade-up"
+                     data-aos-delay="100">
+
+                    <div class="icon flex-shrink-0">
+
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4 class="title">
+                            Credit Financing
+                        </h4>
+
+                        <p class="description">
+
+                            Structured financing support designed to help
+                            eligible businesses access the capital required
+                            to sustain and expand their operations.
+
+                        </p>
+
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services"
+                           class="readmore stretched-link">
+
+                            <span>
+                                Learn More
+                            </span>
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Inventory Financing -->
+
+                <div class="col-lg-4 col-md-6 service-item d-flex"
+                     data-aos="fade-up"
+                     data-aos-delay="200">
+
+                    <div class="icon flex-shrink-0">
+
+                        <i class="fa-solid fa-boxes-stacked"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4 class="title">
+                            Inventory Financing
+                        </h4>
+
+                        <p class="description">
+
+                            Financing solutions that enable businesses
+                            to acquire and manage inventory while
+                            maintaining operational continuity.
+
+                        </p>
+
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services"
+                           class="readmore stretched-link">
+
+                            <span>
+                                Learn More
+                            </span>
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Value Chain Support -->
+
+                <div class="col-lg-4 col-md-6 service-item d-flex"
+                     data-aos="fade-up"
+                     data-aos-delay="300">
+
+                    <div class="icon flex-shrink-0">
+
+                        <i class="fa-solid fa-seedling"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4 class="title">
+                            Value Chain Support
+                        </h4>
+
+                        <p class="description">
+
+                            Supporting businesses and participants across
+                            agricultural value chains by connecting
+                            financing, inventory and market opportunities.
+
+                        </p>
+
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="about"
+                           class="readmore stretched-link">
+
+                            <span>
+                                Learn More
+                            </span>
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT ADX
+    ========================== -->
+
+    <section id="about"
+             class="about section">
+
+        <div class="container">
+
+            <div class="row gy-5 align-items-center">
+
+
+                <!-- Image -->
+
+                <div class="col-lg-6 position-relative align-self-start order-lg-last order-first"
+                     data-aos="fade-up"
+                     data-aos-delay="200">
+
+                    <img src="{% static 'img/Agricultural inventory and goods.jpg' %}"
+                         class="img-fluid rounded"
+                         alt="Agricultural inventory and goods">
+
+                </div>
+
+
+
+                <!-- Content -->
+
+                <div class="col-lg-6 content order-last order-lg-first"
+                     data-aos="fade-up"
+                     data-aos-delay="100">
+
+
+                    <span class="text-uppercase fw-bold">
+
+                        About Arete DeltaX
+
+                    </span>
+
+
+                    <h3>
+
+                        Supporting Growth in Agricultural Value Chains
+
+                    </h3>
+
+
+                    <p>
+
+                        Arete DeltaX, is a registered corporation
+                        working to support growth in agricultural value
+                        chains and markets.
+
+                    </p>
+
+
+                    <p>
+
+                        Through structured credit and inventory financing,
+                        ADX seeks to make financing processes more
+                        organized, transparent and manageable while
+                        supporting businesses involved in agricultural
+                        commerce.
+
+                    </p>
+
+
+
+                    <ul>
+
+
+                        <li>
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <div>
+
+                                <h5>
+                                    Structured Financing
+                                </h5>
+
+                                <p>
+
+                                    Manage financing applications from
+                                    submission through approval and
+                                    disbursement.
+
+                                </p>
+
+                            </div>
+
+                        </li>
+
+
+
+                        <li>
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <div>
+
+                                <h5>
+                                    Transparent Verification
+                                </h5>
+
+                                <p>
+
+                                    Support document review, field
+                                    verification and application
+                                    assessment.
+
+                                </p>
+
+                            </div>
+
+                        </li>
+
+
+
+                        <li>
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <div>
+
+                                <h5>
+                                    Portfolio Management
+                                </h5>
+
+                                <p>
+
+                                    Monitor customers, transactions,
+                                    repayments and financing activities
+                                    throughout the customer lifecycle.
+
+                                </p>
+
+                            </div>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         SOLUTIONS / SERVICES
+    ========================== -->
+
+    <section id="services"
+             class="services section">
+
+
+        <div class="container section-title"
+             data-aos="fade-up">
+
+
+            <h2>
+                Financing & Management Solutions
+            </h2>
+
+
+            <p>
+
+                ADX brings financing activities, verification,
+                inventory management and portfolio monitoring
+                into one structured workflow.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+
+                <!-- Credit Financing -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="100">
+
+                    <div class="card">
+
+                        <div class="card-img">
+
+                            <img src="{% static 'img/Credit financing.jpg' %}"
+                                 alt="Credit financing"
+                                 class="img-fluid">
+
+                        </div>
+
+
+                        <h3>
+                            Credit Financing
+                        </h3>
+
+
+                        <p>
+
+                            Manage financing requests from customer
+                            application and document submission through
+                            verification, review and approval.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Inventory Financing -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="200">
+
+                    <div class="card">
+
+                        <div class="card-img">
+
+                            <img src="{% static 'img/service-3.jpg' %}"
+                                 alt="Inventory financing"
+                                 class="img-fluid">
+
+                        </div>
+
+
+                        <h3>
+                            Inventory Financing
+                        </h3>
+
+
+                        <p>
+
+                            Support businesses requiring financing for
+                            inventory acquisition while maintaining
+                            visibility over suppliers, goods and
+                            transactions.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Agricultural Markets -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="300">
+
+                    <div class="card">
+
+                        <div class="card-img">
+
+                            <img src="{% static 'img/Agricultural markets.jpg' %}"
+                                 alt="Agricultural markets"
+                                 class="img-fluid">
+
+                        </div>
+
+
+                        <h3>
+                            Agricultural Markets
+                        </h3>
+
+
+                        <p>
+
+                            Support participants within agricultural
+                            value chains by improving access to financing
+                            and strengthening business operations.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Verification -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="400">
+
+                    <div class="card">
+
+                        <div class="card-img">
+
+                            <img src="{% static 'img/Verification and assessment.jpg' %}"
+                                 alt="Application verification"
+                                 class="img-fluid">
+
+                        </div>
+
+
+                        <h3>
+                            Verification & Assessment
+                        </h3>
+
+
+                        <p>
+
+                            Organize customer and application verification
+                            through document review, checklists,
+                            verification notes and supporting evidence.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Payment Management -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="500">
+
+                    <div class="card">
+
+                        <div class="card-img">
+
+                            <img src="{% static 'img/Payment and transaction records.jpg' %}"
+                                 alt="Payment and transaction records"
+                                 class="img-fluid">
+
+                        </div>
+
+
+                        <h3>
+                            Payment Management
+                        </h3>
+
+
+                        <p>
+
+                            Track supplier and financing payments,
+                            upload payment confirmations and maintain
+                            transaction records.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Repayment -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="600">
+
+                    <div class="card">
+
+                        <div class="card-img">
+
+                            <img src="{% static 'img/Repayment and portfolio tracking.jpg' %}"
+                                 alt="Inventory and repayment management"
+                                 class="img-fluid">
+
+                        </div>
+
+
+                        <h3>
+                            Repayment & Portfolio Tracking
+                        </h3>
+
+
+                        <p>
+
+                            Record repayments, monitor outstanding
+                            financing and maintain a clear view of
+                            customer portfolio activity.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section id="how-it-works"
+             class="features section">
+
+
+        <div class="container section-title"
+             data-aos="fade-up">
+
+
+            <h2>
+                A Structured Financing Process
+            </h2>
+
+
+            <p>
+
+                ADX organizes financing activities into a clear,
+                traceable workflow from customer onboarding to repayment.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="container">
+
+
+            <!-- Step 1 -->
+
+            <div class="row gy-4 align-items-center features-item">
+
+
+                <div class="col-md-5 d-flex align-items-center"
+                     data-aos="zoom-out">
+
+                    <img src="{% static 'img/Customer onboarding.jpg' %}"
+                         class="img-fluid rounded"
+                         alt="Customer onboarding">
+
+                </div>
+
+
+
+                <div class="col-md-7"
+                     data-aos="fade-up">
+
+
+                    <span class="fw-bold">
+                        STEP 01
+                    </span>
+
+
+                    <h3>
+                        Customer Onboarding & Application
+                    </h3>
+
+
+                    <p>
+
+                        Authorized representatives capture customer
+                        information and create financing applications
+                        based on the customer's needs.
+
+                    </p>
+
+
+                    <ul>
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Customer registration and profile management.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Financing application creation.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Document upload and application tracking.
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Step 2 -->
+
+            <div class="row gy-4 align-items-center features-item">
+
+
+                <div class="col-md-5 order-1 order-md-2 d-flex align-items-center"
+                     data-aos="zoom-out">
+
+                    <img src="{% static 'img/Application verification.jpg' %}"
+                         class="img-fluid rounded"
+                         alt="Application verification">
+
+                </div>
+
+
+
+                <div class="col-md-7 order-2 order-md-1"
+                     data-aos="fade-up">
+
+
+                    <span class="fw-bold">
+                        STEP 02
+                    </span>
+
+
+                    <h3>
+                        Verification & Review
+                    </h3>
+
+
+                    <p>
+
+                        Applications move through verification and review
+                        before a financing decision is made.
+
+                    </p>
+
+
+                    <ul>
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Document review.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Verification checklist.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                GPS and timestamp evidence where applicable.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Verification notes and recommendations.
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Step 3 -->
+
+            <div class="row gy-4 align-items-center features-item">
+
+
+                <div class="col-md-5 d-flex align-items-center"
+                     data-aos="zoom-out">
+
+                    <img src="{% static 'img/Financing approval.jpg' %}"
+                         class="img-fluid rounded"
+                         alt="Financing approval">
+
+                </div>
+
+
+
+                <div class="col-md-7"
+                     data-aos="fade-up">
+
+
+                    <span class="fw-bold">
+                        STEP 03
+                    </span>
+
+
+                    <h3>
+                        Approval, Payment & Monitoring
+                    </h3>
+
+
+                    <p>
+
+                        Verified applications are reviewed for approval,
+                        after which approved transactions can be tracked
+                        through payment and subsequent portfolio activities.
+
+                    </p>
+
+
+                    <ul>
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Application approval or decline.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Supplier and payment information.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Payment confirmation and receipts.
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Step 4 -->
+
+            <div class="row gy-4 align-items-center features-item">
+
+
+                <div class="col-md-5 order-1 order-md-2 d-flex align-items-center"
+                     data-aos="zoom-out">
+
+                    <img src="{% static 'img/Customer Lifecycle.jpg' %}"
+                         class="img-fluid rounded"
+                         alt="Repayment and portfolio tracking">
+
+                </div>
+
+
+
+                <div class="col-md-7 order-2 order-md-1"
+                     data-aos="fade-up">
+
+
+                    <span class="fw-bold">
+                        STEP 04
+                    </span>
+
+
+                    <h3>
+                        Repayment & Customer Lifecycle
+                    </h3>
+
+
+                    <p>
+
+                        Financing does not end with disbursement. ADX
+                        maintains customer and transaction history to
+                        support repayment tracking and future financing
+                        decisions.
+
+                    </p>
+
+
+                    <ul>
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Repayment recording.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Outstanding financing monitoring.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Customer lifecycle tracking.
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <i class="bi bi-check"></i>
+
+                            <span>
+                                Reapplication for existing customers.
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CALL TO ACTION
+    ========================== -->
+
+    <section id="call-to-action"
+             class="call-to-action section dark-background">
+
+
+        <img src="{% static 'img/service-2.jpg' %}"
+             alt="Agricultural inventory and markets">
+
+
+        <div class="container">
+
+            <div class="row justify-content-center"
+                 data-aos="zoom-in">
+
+
+                <div class="col-xl-9">
+
+                    <div class="text-center">
+
+
+                        <h3>
+
+                            Building Stronger Value Chains Through Better Financing
+
+                        </h3>
+
+
+                        <p>
+
+                            ADX is committed to supporting businesses
+                            operating across agricultural value chains
+                            through structured financing and effective
+                            portfolio management.
+
+                        </p>
+
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="contact"
+                           class="cta-btn">
+
+                            Get In Touch
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         WHY ADX / FEATURES
+    ========================== -->
+
+    <section id="features"
+             class="features section">
+
+
+        <div class="container section-title"
+             data-aos="fade-up">
+
+
+            <h2>
+                Designed for Better Financing Management
+            </h2>
+
+
+            <p>
+
+                The ADX platform brings the major stages of financing
+                operations into one organized management environment.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+
+                <!-- Feature 1 -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="100">
+
+                    <div class="p-4">
+
+                        <div class="icon mb-3">
+
+                            <i class="bi bi-diagram-3 fs-1"></i>
+
+                        </div>
+
+
+                        <h4>
+                            Centralized Workflow
+                        </h4>
+
+
+                        <p>
+
+                            Manage customers, applications, verification,
+                            payments and repayments within one connected
+                            workflow.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Feature 2 -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="200">
+
+                    <div class="p-4">
+
+                        <div class="icon mb-3">
+
+                            <i class="bi bi-shield-check fs-1"></i>
+
+                        </div>
+
+
+                        <h4>
+                            Controlled Verification
+                        </h4>
+
+
+                        <p>
+
+                            Support structured verification and review
+                            before applications proceed to approval.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Feature 3 -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="300">
+
+                    <div class="p-4">
+
+                        <div class="icon mb-3">
+
+                            <i class="bi bi-clock-history fs-1"></i>
+
+                        </div>
+
+
+                        <h4>
+                            Status Tracking
+                        </h4>
+
+
+                        <p>
+
+                            Track application progress and maintain
+                            status history throughout the financing
+                            lifecycle.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Feature 4 -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="400">
+
+                    <div class="p-4">
+
+                        <div class="icon mb-3">
+
+                            <i class="bi bi-file-earmark-text fs-1"></i>
+
+                        </div>
+
+
+                        <h4>
+                            Document Management
+                        </h4>
+
+
+                        <p>
+
+                            Keep customer and application documents
+                            organized and accessible to authorized
+                            personnel.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Feature 5 -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="500">
+
+                    <div class="p-4">
+
+                        <div class="icon mb-3">
+
+                            <i class="bi bi-bar-chart-line fs-1"></i>
+
+                        </div>
+
+
+                        <h4>
+                            Portfolio Visibility
+                        </h4>
+
+
+                        <p>
+
+                            Monitor financing activities, repayments
+                            and portfolio information to support
+                            informed decisions.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Feature 6 -->
+
+                <div class="col-lg-4 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="600">
+
+                    <div class="p-4">
+
+                        <div class="icon mb-3">
+
+                            <i class="bi bi-journal-check fs-1"></i>
+
+                        </div>
+
+
+                        <h4>
+                            Audit & Accountability
+                        </h4>
+
+
+                        <p>
+
+                            Maintain activity records and transaction
+                            history to improve accountability across
+                            the financing process.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FAQ
+    ========================== -->
+
+    <section id="faq"
+             class="faq section">
+
+
+        <div class="container section-title"
+             data-aos="fade-up">
+
+
+            <h2>
+                Frequently Asked Questions
+            </h2>
+
+
+            <p>
+
+                Learn more about ADX and the financing management
+                process.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="container">
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-10">
+
+                    <div class="faq-container">
+
+
+                        <!-- FAQ 1 -->
+
+                        <div class="faq-item faq-active"
+                             data-aos="fade-up"
+                             data-aos-delay="100">
+
+
+                            <i class="faq-icon bi bi-question-circle"></i>
+
+
+                            <h3>
+                                What is Arete DeltaX (ADX)?
+                            </h3>
+
+
+                            <div class="faq-content">
+
+                                <p>
+
+                                    ADX is a registered corporation
+                                    working to support growth in
+                                    agricultural value chains and
+                                    markets through financing and
+                                    related business support.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+
+                        </div>
+
+
+
+                        <!-- FAQ 2 -->
+
+                        <div class="faq-item"
+                             data-aos="fade-up"
+                             data-aos-delay="200">
+
+
+                            <i class="faq-icon bi bi-question-circle"></i>
+
+
+                            <h3>
+                                What type of financing does ADX support?
+                            </h3>
+
+
+                            <div class="faq-content">
+
+                                <p>
+
+                                    The platform is designed to support
+                                    credit and inventory financing
+                                    activities, including application
+                                    processing, verification, approval,
+                                    payment and repayment tracking.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+
+                        </div>
+
+
+
+                        <!-- FAQ 3 -->
+
+                        <div class="faq-item"
+                             data-aos="fade-up"
+                             data-aos-delay="300">
+
+
+                            <i class="faq-icon bi bi-question-circle"></i>
+
+
+                            <h3>
+                                How is a financing application processed?
+                            </h3>
+
+
+                            <div class="faq-content">
+
+                                <p>
+
+                                    Applications move through customer
+                                    onboarding, document submission,
+                                    verification, review, approval,
+                                    payment and subsequent repayment
+                                    monitoring.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+
+                        </div>
+
+
+
+                        <!-- FAQ 4 -->
+
+                        <div class="faq-item"
+                             data-aos="fade-up"
+                             data-aos-delay="400">
+
+
+                            <i class="faq-icon bi bi-question-circle"></i>
+
+
+                            <h3>
+                                Does the system support verification?
+                            </h3>
+
+
+                            <div class="faq-content">
+
+                                <p>
+
+                                    Yes. Authorized verification
+                                    personnel can review customer
+                                    information, documents, checklists,
+                                    verification notes and supporting
+                                    evidence before applications proceed.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+
+                        </div>
+
+
+
+                        <!-- FAQ 5 -->
+
+                        <div class="faq-item"
+                             data-aos="fade-up"
+                             data-aos-delay="500">
+
+
+                            <i class="faq-icon bi bi-question-circle"></i>
+
+
+                            <h3>
+                                Can existing customers apply again?
+                            </h3>
+
+
+                            <div class="faq-content">
+
+                                <p>
+
+                                    Yes. The system is designed to
+                                    maintain customer history and support
+                                    reapplication for existing customers,
+                                    subject to the applicable financing
+                                    process.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer id="footer"
+        class="footer dark-background">
+
+
+    <div class="container footer-top">
+
+        <div class="row gy-4">
+
+
+            <!-- Company -->
+
+            <div class="col-lg-5 col-md-12 footer-about">
+
+
+                <a href="{% url 'index' %}"
+                   class="logo d-flex align-items-center">
+
+                    <img src="{% static 'img/logo.png' %}"
+                         alt="ADX Logo"
+                         style="height: 45px; width: auto; margin-right: 10px;">
+
+                    <span class="sitename">
+                        Arete DeltaX
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    ADX is a registered corporation working to support
+                    growth in agricultural value chains and markets
+                    through structured credit and inventory financing
+                    solutions.
+
+                </p>
+
+
+
+                <div class="social-links d-flex mt-4">
+
+
+                    <a href="{% url 'index' %}">
+
+                        <i class="bi bi-twitter-x"></i>
+
+                    </a>
+
+
+                    <a href="{% url 'index' %}">
+
+                        <i class="bi bi-facebook"></i>
+
+                    </a>
+
+
+                    <a href="{% url 'index' %}">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+
+                    <a href="{% url 'index' %}">
+
+                        <i class="bi bi-linkedin"></i>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Useful Links -->
+
+            <div class="col-lg-2 col-6 footer-links">
+
+
+                <h4>
+                    Useful Links
+                </h4>
+
+
+                <ul>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="hero">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="about">
+
+                            About ADX
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services">
+
+                            Solutions
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="how-it-works">
+
+                            How It Works
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="faq">
+
+                            FAQs
+
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- Solutions -->
+
+            <div class="col-lg-2 col-6 footer-links">
+
+
+                <h4>
+                    Solutions
+                </h4>
+
+
+                <ul>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services">
+
+                            Credit Financing
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services">
+
+                            Inventory Financing
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services">
+
+                            Verification
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services">
+
+                            Payment Management
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="{% url 'index' %}"
+                           data-scroll="services">
+
+                            Repayment Tracking
+
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- Contact -->
+
+            <div id="contact"
+                 class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+
+
+                <h4>
+                    Contact ADX
+                </h4>
+
+
+                <p>
+                    Arete DeltaX
+                </p>
+
+
+                <p>
+                    Agricultural Value Chain & Market Support
+                </p>
+
+
+                <p class="mt-4">
+
+
+                    <strong>
+                        Phone:
+                    </strong>
+
+
+                    <span>
+                        +234 XXX XXX XXXX
+                    </span>
+
+
+                </p>
+
+
+                <p>
+
+
+                    <strong>
+                        Email:
+                    </strong>
+
+
+                    <span>
+                        info@aretedeltax.com
+                    </span>
+
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Copyright -->
+
+    <div class="container copyright text-center mt-4">
+
+
+        <p>
+
+            ©
+
+            <span>
+                Copyright
+            </span>
+
+
+            <strong class="px-1 sitename">
+
+                Arete DeltaX
+
+            </strong>
+
+
+            <span>
+
+                All Rights Reserved
+
+            </span>
+
+        </p>
+
+
+        <div class="credits">
+
+            ADX Credit & Inventory Financing Management System
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     STAFF LOGIN
+========================== -->
+
+<section id="staff-login"
+         class="d-none">
+
+    <!--
+
+        Staff login will eventually point to:
+
+        {% url 'login' %}
+
+        once the Django authentication URL
+        has been configured.
+
+    -->
+
+</section>
+
+
+
+<!-- =========================
+     SCROLL TOP
+========================== -->
+
+<a href="{% url 'index' %}"
+   id="scroll-top"
+   class="scroll-top d-flex align-items-center justify-content-center">
+
+    <i class="bi bi-arrow-up-short"></i>
+
+</a>
+
+
+
+<!-- =========================
+     PRELOADER
+========================== -->
+
+<div id="preloader"></div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<script src="{% static 'aos/aos.js' %}"></script>
+
+<script src="{% static 'purecounter/purecounter_vanilla.js' %}"></script>
+
+
+
+<!-- =========================
+     CLEAN SECTION SCROLLING
+========================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const scrollLinks = document.querySelectorAll("[data-scroll]");
+
+
+    scrollLinks.forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+
+            const targetId = this.getAttribute("data-scroll");
+
+            const targetElement = document.getElementById(targetId);
+
+
+            if (targetElement) {
+
+                targetElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
+
+
+    /*
+     * Scroll Top Button
+     */
+
+    const scrollTopButton = document.getElementById("scroll-top");
+
+
+    if (scrollTopButton) {
+
+        scrollTopButton.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>

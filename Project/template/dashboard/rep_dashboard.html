@@ -1,0 +1,2385 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Rep Dashboard | Arete DeltaX
+    </title>
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: #f5f7fb;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #263238;
+
+        }
+
+
+        /* ==================================================
+           SIDEBAR
+        ================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 260px;
+
+            height: 100vh;
+
+            background: #102a43;
+
+            color: #ffffff;
+
+            z-index: 1000;
+
+            overflow-y: auto;
+
+            transition: 0.3s;
+
+        }
+
+
+        .sidebar-brand {
+
+            height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 24px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
+        }
+
+
+        .sidebar-brand img {
+
+            height: 40px;
+
+            width: auto;
+
+            margin-right: 10px;
+
+        }
+
+
+        .sidebar-brand span {
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                22px 20px 8px;
+
+            color: #8fa9c2;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+        }
+
+
+        .sidebar-menu {
+
+            list-style: none;
+
+            padding: 0 12px;
+
+            margin: 0;
+
+        }
+
+
+        .sidebar-menu li {
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .sidebar-menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 12px 14px;
+
+            border-radius: 8px;
+
+            color: #d8e4ef;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+
+            background: #1f4e79;
+
+            color: #ffffff;
+
+        }
+
+
+        .sidebar-menu i {
+
+            font-size: 17px;
+
+            width: 22px;
+
+            text-align: center;
+
+        }
+
+
+        /* ==================================================
+           LOGOUT
+        ================================================== */
+
+        .logout-form {
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        .logout-button {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            color: #ffb4b4;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .logout-button i {
+
+            font-size: 17px;
+
+            width: 22px;
+
+            text-align: center;
+
+        }
+
+
+        .logout-button:hover {
+
+            background:
+                rgba(220,53,69,0.15);
+
+            color: #ffd0d0;
+
+        }
+
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        .main-content {
+
+            margin-left: 260px;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* ==================================================
+           TOPBAR
+        ================================================== */
+
+        .topbar {
+
+            min-height: 75px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e8edf3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 14px 30px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 900;
+
+        }
+
+
+        .topbar-title {
+
+            min-width: 0;
+
+        }
+
+
+        .topbar-title h4 {
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #102a43;
+
+        }
+
+
+        .topbar-title small {
+
+            color: #7b8794;
+
+        }
+
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .notification {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #486581;
+
+            background: #f1f5f9;
+
+            text-decoration: none;
+
+            position: relative;
+
+        }
+
+
+        .notification-badge {
+
+            position: absolute;
+
+            top: 5px;
+
+            right: 5px;
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #e63946;
+
+        }
+
+
+        .profile-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .profile-avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #1f4e79;
+
+            color: #ffffff;
+
+            font-weight: 700;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .profile-info strong {
+
+            display: block;
+
+            font-size: 13px;
+
+        }
+
+
+        .profile-info span {
+
+            font-size: 11px;
+
+            color: #7b8794;
+
+        }
+
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .content {
+
+            padding: 30px;
+
+        }
+
+
+        .welcome-card {
+
+            background: #102a43;
+
+            color: #ffffff;
+
+            border-radius: 14px;
+
+            padding: 28px;
+
+            margin-bottom: 28px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .welcome-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+
+            height: 220px;
+
+            border-radius: 50%;
+
+            right: -70px;
+
+            top: -80px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+        }
+
+
+        .welcome-card h2 {
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .welcome-card p {
+
+            color: #c8d6e5;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .location-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 12px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+        }
+
+
+        /* ==================================================
+           STAT CARDS
+        ================================================== */
+
+        .stat-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e8edf3;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            height: 100%;
+
+            transition: 0.2s;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(16,42,67,0.08);
+
+        }
+
+
+        .stat-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #eaf2f8;
+
+            color: #1f4e79;
+
+            font-size: 20px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .stat-card h3 {
+
+            font-size: 27px;
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #102a43;
+
+        }
+
+
+        .stat-card p {
+
+            margin: 5px 0 0;
+
+            color: #7b8794;
+
+            font-size: 13px;
+
+        }
+
+
+        /* ==================================================
+           SECTION HEADERS
+        ================================================== */
+
+        .section-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .section-header h5 {
+
+            margin: 0;
+
+            font-weight: 700;
+
+            color: #102a43;
+
+        }
+
+
+        .section-header a {
+
+            color: #1f4e79;
+
+            font-size: 13px;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        /* ==================================================
+           QUICK ACTIONS
+        ================================================== */
+
+        .action-card {
+
+            display: block;
+
+            background: #ffffff;
+
+            border: 1px solid #e8edf3;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            text-decoration: none;
+
+            color: #263238;
+
+            height: 100%;
+
+            transition: 0.2s;
+
+        }
+
+
+        .action-card:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(16,42,67,0.08);
+
+            color: #263238;
+
+        }
+
+
+        .action-icon {
+
+            width: 44px;
+
+            height: 44px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f0f4f8;
+
+            color: #1f4e79;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .action-card strong {
+
+            display: block;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .action-card span {
+
+            font-size: 12px;
+
+            color: #7b8794;
+
+        }
+
+
+        /* ==================================================
+           TABLE CARDS
+        ================================================== */
+
+        .dashboard-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e8edf3;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+        }
+
+
+        .dashboard-card-header {
+
+            padding: 18px 20px;
+
+            border-bottom: 1px solid #edf1f5;
+
+        }
+
+
+        .dashboard-table {
+
+            margin: 0;
+
+        }
+
+
+        .dashboard-table th {
+
+            font-size: 11px;
+
+            color: #7b8794;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            font-weight: 600;
+
+            border-bottom:
+                1px solid #edf1f5;
+
+            padding: 14px 20px;
+
+        }
+
+
+        .dashboard-table td {
+
+            padding: 15px 20px;
+
+            vertical-align: middle;
+
+            font-size: 13px;
+
+            border-bottom:
+                1px solid #f0f2f5;
+
+        }
+
+
+        .dashboard-table tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        .status {
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .status-draft {
+
+            background: #edf2f7;
+
+            color: #52606d;
+
+        }
+
+
+        .status-submitted {
+
+            background: #fff4cc;
+
+            color: #8a6d1d;
+
+        }
+
+
+        .status-verification {
+
+            background: #e7f5ff;
+
+            color: #1864ab;
+
+        }
+
+
+        .status-approved {
+
+            background: #e8f7ee;
+
+            color: #20744a;
+
+        }
+
+
+        .status-disbursed {
+
+            background: #e6fcf5;
+
+            color: #087f5b;
+
+        }
+
+
+        /* ==================================================
+           MOBILE TOGGLE
+        ================================================== */
+
+        .mobile-toggle {
+
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 22px;
+
+            color: #102a43;
+
+            padding: 0;
+
+            line-height: 1;
+
+        }
+
+
+        /* ==================================================
+           SCROLL TOP
+        ================================================== */
+
+        .scroll-top {
+
+            position: fixed;
+
+            right: 20px;
+
+            bottom: 20px;
+
+            width: 42px;
+
+            height: 42px;
+
+            background: #0d6efd;
+
+            color: #ffffff;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: all 0.3s ease;
+
+            z-index: 9999;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 4px 12px
+                rgba(13,110,253,0.25);
+
+        }
+
+
+        .scroll-top.active {
+
+            opacity: 1;
+
+            visibility: visible;
+
+        }
+
+
+        .scroll-top:hover {
+
+            color: #ffffff;
+
+            transform: translateY(-3px);
+
+        }
+
+
+        .scroll-top i {
+
+            font-size: 24px;
+
+        }
+
+
+        /* ==================================================
+           PRELOADER
+        ================================================== */
+
+        #preloader {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100vh;
+
+            background: #ffffff;
+
+            z-index: 99999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        #preloader::before {
+
+            content: "";
+
+            width: 45px;
+
+            height: 45px;
+
+            border: 4px solid #e5e7eb;
+
+            border-top-color: #0d6efd;
+
+            border-radius: 50%;
+
+            animation:
+                preloader-spin
+                0.8s linear infinite;
+
+        }
+
+
+        #preloader.loaded {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+
+        }
+
+
+        @keyframes preloader-spin {
+
+            from {
+
+                transform:
+                    rotate(0deg);
+
+            }
+
+            to {
+
+                transform:
+                    rotate(360deg);
+
+            }
+
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 991px) {
+
+            .sidebar {
+
+                left: -260px;
+
+            }
+
+
+            .sidebar.show {
+
+                left: 0;
+
+                box-shadow:
+                    8px 0 25px
+                    rgba(0,0,0,0.15);
+
+            }
+
+
+            .main-content {
+
+                margin-left: 0;
+
+            }
+
+
+            .mobile-toggle {
+
+                display: block;
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    12px 18px;
+
+            }
+
+
+            .topbar-title h4 {
+
+                font-size: 18px;
+
+                white-space: nowrap;
+
+            }
+
+
+            .topbar-title small {
+
+                font-size: 11px;
+
+            }
+
+
+            .content {
+
+                padding: 20px;
+
+            }
+
+
+            .profile-info {
+
+                display: none;
+
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .topbar {
+
+                min-height: 68px;
+
+                padding:
+                    10px 15px;
+
+            }
+
+
+            .topbar-title h4 {
+
+                font-size: 16px;
+
+            }
+
+
+            .topbar-title small {
+
+                display: none;
+
+            }
+
+
+            .topbar-right {
+
+                gap: 10px;
+
+            }
+
+
+            .notification {
+
+                width: 36px;
+
+                height: 36px;
+
+            }
+
+
+            .profile-avatar {
+
+                width: 36px;
+
+                height: 36px;
+
+                font-size: 12px;
+
+            }
+
+
+            .content {
+
+                padding: 15px;
+
+            }
+
+
+            .welcome-card {
+
+                padding: 22px;
+
+            }
+
+
+            .welcome-card h2 {
+
+                font-size: 21px;
+
+            }
+
+
+            .welcome-card p {
+
+                font-size: 13px;
+
+            }
+
+
+            .section-header h5 {
+
+                font-size: 16px;
+
+            }
+
+
+            .scroll-top {
+
+                right: 15px;
+
+                bottom: 15px;
+
+                width: 40px;
+
+                height: 40px;
+
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .topbar-title h4 {
+
+                font-size: 15px;
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    10px 12px;
+
+            }
+
+
+            .topbar > div:first-child {
+
+                gap: 8px !important;
+
+            }
+
+
+            .mobile-toggle {
+
+                font-size: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     PRELOADER
+====================================================== -->
+
+<div id="preloader"></div>
+
+
+<!-- ======================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+
+    <div class="sidebar-brand">
+
+        <img src="{% static 'img/logo.png' %}"
+             alt="ADX Logo">
+
+        <span>
+            Arete DeltaX
+        </span>
+
+    </div>
+
+
+    <div class="sidebar-section">
+        Workspace
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <li>
+
+            <a href="{% url 'rep_dashboard' %}"
+               class="active">
+
+                <i class="bi bi-grid-1x2"></i>
+
+                Dashboard
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'customer_list' %}">
+
+                <i class="bi bi-people"></i>
+
+                Customers
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'customer_create' %}">
+
+                <i class="bi bi-person-plus"></i>
+
+                New Customer
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'application_list' %}">
+
+                <i class="bi bi-file-earmark-text"></i>
+
+                Applications
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="{% url 'application_create' %}">
+
+                <i class="bi bi-plus-square"></i>
+
+                New Application
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+    <div class="sidebar-section">
+        Operations
+    </div>
+
+
+    <ul class="sidebar-menu">
+
+
+        <li>
+
+            <a href="{% url 'document_list' %}">
+
+                <i class="bi bi-cloud-arrow-up"></i>
+
+                Documents
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-person-vcard"></i>
+
+                Guarantors
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-shop"></i>
+
+                Suppliers
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-credit-card"></i>
+
+                Payments
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-arrow-repeat"></i>
+
+                Repayments
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+<!-- ======================================================
+     Later Stuffs
+
+    <div class="sidebar-section">
+        Portfolio
+    </div>
+
+====================================================== -->
+    <ul class="sidebar-menu">
+
+<!-- ======================================================
+     Later Stuffs
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-bar-chart"></i>
+
+                My Portfolio
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-bell"></i>
+
+                Notifications
+
+            </a>
+
+        </li>
+
+====================================================== -->
+
+        <li>
+
+
+            <hr class="mx-3 border-secondary">
+
+
+            <!-- LOGOUT -->
+
+            <form method="post"
+                  action="{% url 'logout' %}"
+                  class="logout-form">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="logout-button">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout
+
+                </button>
+
+            </form>
+
+
+        </li>
+
+
+    </ul>
+
+</aside>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+====================================================== -->
+
+<div class="main-content">
+
+
+    <!-- ==================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+
+        <div class="d-flex align-items-center gap-3">
+
+
+            <button class="mobile-toggle"
+                    id="mobileToggle"
+                    type="button"
+                    aria-label="Toggle navigation">
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+
+            <div class="topbar-title">
+
+                <h4>
+                    Representative Dashboard
+                </h4>
+
+                <small>
+                    Manage customers, applications and portfolio activities.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+
+            <a 
+               class="notification"
+               aria-label="Notifications">
+
+                <i class="bi bi-bell"></i>
+
+                <span class="notification-badge"></span>
+
+            </a>
+
+
+            <div class="profile-box">
+
+
+                <div class="profile-avatar">
+
+                    {{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+
+                        {{ request.user.get_full_name|default:request.user.username }}
+
+                    </strong>
+
+                    <span>
+                        Representative
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         CONTENT
+    ================================================== -->
+
+    <main class="content">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome-card">
+
+
+            <h2>
+
+                Welcome back,
+                {{ request.user.first_name|default:request.user.username }}.
+
+            </h2>
+
+
+            <p>
+
+                Manage your customers, financing applications
+                and assigned portfolio from one workspace.
+
+            </p>
+
+
+            {% if staff_location %}
+
+                <div class="location-badge">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    {{ staff_location.name }}
+
+                    {% if staff_location.zone %}
+
+                        · {{ staff_location.zone }}
+
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="row g-4 mb-4">
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-people"></i>
+
+                    </div>
+
+
+                    <h3>
+                        {{ customer_count }}
+                    </h3>
+
+
+                    <p>
+                        Total Customers
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                    </div>
+
+
+                    <h3>
+                        {{ application_count }}
+                    </h3>
+
+
+                    <p>
+                        Total Applications
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-hourglass-split"></i>
+
+                    </div>
+
+
+                    <h3>
+                        {{ pending_application_count }}
+                    </h3>
+
+
+                    <p>
+                        Applications in Progress
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+
+                    <h3>
+                        {{ approved_application_count }}
+                    </h3>
+
+
+                    <p>
+                        Approved Applications
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <div class="section-header">
+
+            <h5>
+                Quick Actions
+            </h5>
+
+        </div>
+
+
+        <div class="row g-4 mb-4">
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <a href="{% url 'customer_create' %}"
+                   class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-person-plus"></i>
+
+                    </div>
+
+                    <strong>
+                        Add New Customer
+                    </strong>
+
+                    <span>
+                        Register a new customer.
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <a href="{% url 'application_create' %}"
+                   class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-file-earmark-plus"></i>
+
+                    </div>
+
+                    <strong>
+                        New Application
+                    </strong>
+
+                    <span>
+                        Start a financing application.
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <a href="{% url 'customer_list' %}"
+                   class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <strong>
+                        Find Customer
+                    </strong>
+
+                    <span>
+                        Search your customer records.
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="col-xl-3 col-md-6">
+
+                <a href="{% url 'application_list' %}"
+                   class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-kanban"></i>
+
+                    </div>
+
+                    <strong>
+                        Track Applications
+                    </strong>
+
+                    <span>
+                        Monitor application progress.
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             RECENT APPLICATIONS
+        ================================================== -->
+
+        <div class="section-header">
+
+            <h5>
+                Recent Applications
+            </h5>
+
+
+            <a href="{% url 'application_list' %}">
+                View All
+            </a>
+
+        </div>
+
+
+        <div class="dashboard-card mb-4">
+
+
+            <div class="table-responsive">
+
+
+                <table class="table dashboard-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Application
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        {% for application in recent_applications %}
+
+
+                            <tr>
+
+
+                                <td>
+
+                                    <strong>
+
+                                        {{ application.application_id }}
+
+                                    </strong>
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ application.customer.business_name }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ application.get_application_type_display }}
+
+                                </td>
+
+
+                                <td>
+
+                                    ₦{{ application.requested_amount|floatformat:2 }}
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="status status-{{ application.status }}">
+
+                                        {{ application.get_status_display }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ application.created_at|date:"d M Y" }}
+
+                                </td>
+
+
+                            </tr>
+
+
+                        {% empty %}
+
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="text-center py-5">
+
+                                    <i class="bi bi-file-earmark-x fs-3 d-block mb-2 text-muted"></i>
+
+                                    <span class="text-muted">
+
+                                        No financing applications yet.
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             RECENT CUSTOMERS
+        ================================================== -->
+
+        <div class="section-header">
+
+            <h5>
+                Recently Added Customers
+            </h5>
+
+
+            <a href="{% url 'customer_list' %}">
+                View All
+            </a>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+
+            <div class="table-responsive">
+
+
+                <table class="table dashboard-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Customer ID
+                            </th>
+
+                            <th>
+                                Business
+                            </th>
+
+                            <th>
+                                Contact
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Registered
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        {% for customer in recent_customers %}
+
+
+                            <tr>
+
+
+                                <td>
+
+                                    <strong>
+
+                                        {{ customer.customer_id }}
+
+                                    </strong>
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ customer.business_name }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ customer.phone }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if customer.location %}
+
+                                        {{ customer.location.name }}
+
+                                    {% else %}
+
+                                        —
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ customer.created_at|date:"d M Y" }}
+
+                                </td>
+
+
+                            </tr>
+
+
+                        {% empty %}
+
+
+                            <tr>
+
+                                <td colspan="5"
+                                    class="text-center py-5">
+
+                                    <i class="bi bi-people fs-3 d-block mb-2 text-muted"></i>
+
+                                    <span class="text-muted">
+
+                                        No customers registered yet.
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<!-- ======================================================
+     SCROLL TOP
+====================================================== -->
+
+<a href="#"
+   id="scroll-top"
+   class="scroll-top"
+   aria-label="Scroll to top">
+
+    <i class="bi bi-arrow-up-short"></i>
+
+</a>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}">
+</script>
+
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       PRELOADER
+    ===================================================== */
+
+    const preloader =
+        document.getElementById("preloader");
+
+
+    if (preloader) {
+
+        window.addEventListener("load", function () {
+
+            preloader.classList.add("loaded");
+
+
+            setTimeout(function () {
+
+                preloader.remove();
+
+            }, 300);
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
+
+    const toggle =
+        document.getElementById("mobileToggle");
+
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    if (toggle && sidebar) {
+
+
+        toggle.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.toggle("show");
+
+            }
+        );
+
+
+        /* Close sidebar after selecting a menu item */
+
+        const sidebarLinks =
+            sidebar.querySelectorAll(
+                ".sidebar-menu a"
+            );
+
+
+        sidebarLinks.forEach(function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        window.innerWidth <= 991
+                    ) {
+
+                        sidebar.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       SCROLL TOP
+    ===================================================== */
+
+    const scrollTopButton =
+        document.getElementById("scroll-top");
+
+
+    if (scrollTopButton) {
+
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+
+                if (window.scrollY > 300) {
+
+                    scrollTopButton.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    scrollTopButton.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+
+        scrollTopButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
+    }
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

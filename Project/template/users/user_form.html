@@ -1,0 +1,658 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+
+    <!-- Favicon -->
+
+    <link rel="shortcut icon"
+          href="{% static 'img/logo.png' %}"
+          type="image/png">
+
+    <title>
+        {{ page_title }} | Arete DeltaX
+    </title>
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap.css' %}">
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/main.css' %}">
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+
+    <!-- FontAwesome -->
+
+    <link rel="stylesheet"
+          href="{% static 'fontawesome-free/css/all.min.css' %}">
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+        }
+
+        .staff-wrapper {
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h2 {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .form-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .form-card-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid #eeeeee;
+            background: #ffffff;
+        }
+
+        .form-card-header h4 {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .form-card-header p {
+            margin: 5px 0 0;
+            color: #6c757d;
+        }
+
+        .form-card-body {
+            padding: 30px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 48px;
+            border-radius: 8px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: none;
+            border-color: #0d6efd;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .password-note {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 7px;
+        }
+
+        .error-box {
+            background: #fff1f1;
+            border: 1px solid #f3b4b4;
+            color: #a33a3a;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border-radius: 8px;
+        }
+
+        .info-panel {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 22px;
+            height: 100%;
+        }
+
+        .info-panel i {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .info-panel h5 {
+            font-weight: 700;
+        }
+
+        .info-panel p {
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="staff-wrapper">
+
+    <div class="container">
+
+
+        <!-- ==================================================
+             HEADER
+        ================================================== -->
+
+        <div class="page-header">
+
+            <div class="d-flex justify-content-between
+                        align-items-center
+                        flex-wrap gap-3">
+
+                <div>
+
+                    <h2>
+
+                        <i class="bi bi-person-plus me-2"></i>
+
+                        {{ page_title }}
+
+                    </h2>
+
+                    <p>
+
+                        Manage ADX staff accounts and access roles.
+
+                    </p>
+
+                </div>
+
+
+                <div class="top-actions">
+
+                    <a href="{% url 'admin_dashboard' %}"
+                       class="btn btn-outline-secondary">
+
+                        <i class="bi bi-speedometer2 me-1"></i>
+
+                        Dashboard
+
+                    </a>
+
+
+                    <a href="{% url 'user_list' %}"
+                       class="btn btn-outline-primary">
+
+                        <i class="bi bi-people me-1"></i>
+
+                        Staff Users
+
+                    </a>
+
+                    <form method="post"
+                      action="{% url 'logout' %}"
+                      class="m-0">
+
+                        {% csrf_token %}
+
+                        <button type="submit"
+                            class="nav-link logout-link border-0 bg-transparent w-100 text-start">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                                Logout
+
+                        </button>
+
+                    </form>
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="row g-4">
+
+
+            <!-- FORM -->
+
+            <div class="col-lg-8">
+
+                <div class="form-card">
+
+
+                    <div class="form-card-header">
+
+                        <h4>
+
+                            <i class="bi bi-person-badge me-2"></i>
+
+                            Staff Account Information
+
+                        </h4>
+
+                        <p>
+
+                            Enter the staff member's details and
+                            assign the appropriate system role.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-card-body">
+
+
+                        {% if form.non_field_errors %}
+
+                            <div class="error-box">
+
+                                {{ form.non_field_errors }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <form method="POST">
+
+                            {% csrf_token %}
+
+
+                            <!-- BASIC INFORMATION -->
+
+                            <div class="section-label">
+
+                                Basic Information
+
+                            </div>
+
+
+                            <div class="row g-4">
+
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Username
+
+                                    </label>
+
+                                    {{ form.username }}
+
+                                    {% for error in form.username.errors %}
+
+                                        <div class="text-danger small mt-1">
+
+                                            {{ error }}
+
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Email Address
+
+                                    </label>
+
+                                    {{ form.email }}
+
+                                    {% for error in form.email.errors %}
+
+                                        <div class="text-danger small mt-1">
+
+                                            {{ error }}
+
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        First Name
+
+                                    </label>
+
+                                    {{ form.first_name }}
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Last Name
+
+                                    </label>
+
+                                    {{ form.last_name }}
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Phone Number
+
+                                    </label>
+
+                                    {{ form.phone }}
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+
+                                        Staff Role
+
+                                    </label>
+
+                                    {{ form.role }}
+
+                                </div>
+
+
+                                <div class="col-md-12">
+
+                                    <label class="form-label">
+
+                                        Location / Zone
+
+                                    </label>
+
+                                    {{ form.location }}
+
+                                </div>
+
+                            </div>
+
+
+                            <hr class="my-4">
+
+
+                            <!-- PASSWORD -->
+
+                            {% if form_mode == "create" %}
+
+                                <div class="section-label">
+
+                                    Account Security
+
+                                </div>
+
+
+                                <div class="row g-4">
+
+
+                                    <div class="col-md-6">
+
+                                        <label class="form-label">
+
+                                            Password
+
+                                        </label>
+
+                                        {{ form.password1 }}
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <label class="form-label">
+
+                                            Confirm Password
+
+                                        </label>
+
+                                        {{ form.password2 }}
+
+                                    </div>
+
+
+                                    <div class="col-12">
+
+                                        <div class="password-note">
+
+                                            <i class="bi bi-shield-check me-1"></i>
+
+                                            Passwords are securely handled
+                                            by Django's authentication system.
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            {% else %}
+
+                                <div class="section-label">
+
+                                    Account Status
+
+                                </div>
+
+
+                                <div class="form-check form-switch">
+
+                                    {{ form.is_active }}
+
+                                    <label class="form-check-label">
+
+                                        Keep this staff account active
+
+                                    </label>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <hr class="my-4">
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="d-flex justify-content-between
+                                        align-items-center
+                                        flex-wrap gap-2">
+
+
+                                <a href="{% url 'user_list' %}"
+                                   class="btn btn-light">
+
+                                    <i class="bi bi-arrow-left me-1"></i>
+
+                                    Cancel
+
+                                </a>
+
+
+                                <button type="submit"
+                                        class="btn btn-primary px-4">
+
+                                    {% if form_mode == "create" %}
+
+                                        <i class="bi bi-person-plus me-1"></i>
+
+                                        Create Staff User
+
+                                    {% else %}
+
+                                        <i class="bi bi-check2-circle me-1"></i>
+
+                                        Save Changes
+
+                                    {% endif %}
+
+                                </button>
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- INFORMATION PANEL -->
+
+            <div class="col-lg-4">
+
+                <div class="info-panel">
+
+
+                    <i class="bi bi-shield-lock"></i>
+
+
+                    <h5>
+
+                        Staff Access Management
+
+                    </h5>
+
+
+                    <p>
+
+                        Staff accounts provide controlled access
+                        to the ADX Credit & Inventory Financing
+                        Management System.
+
+                    </p>
+
+
+                    <hr>
+
+
+                    <p class="mb-2">
+
+                        <strong>Representative</strong>
+
+                    </p>
+
+                    <p>
+
+                        Handles customers, applications,
+                        documents, suppliers, payments and
+                        repayment activities.
+
+                    </p>
+
+
+                    <p class="mb-2">
+
+                        <strong>Reviewer</strong>
+
+                    </p>
+
+                    <p>
+
+                        Reviews verified applications and manages
+                        approval, payment and transaction activities.
+
+                    </p>
+
+
+                    <div class="alert alert-light border mt-4 mb-0">
+
+                        <i class="bi bi-info-circle me-1"></i>
+
+                        Only administrators can create or modify
+                        staff accounts.
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>
