@@ -89,21 +89,10 @@ WSGI_APPLICATION = 'Adx.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'devadx',
-        'USER': 'Andrew',
-        'PASSWORD': 'Information17$',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
-# DATABASES = {
-#     'default': dj_database_url.parse(
-#         'postgresql://adx_7a7z_user:gLFDEOlJ4RM1kzzpKOPSSPr1pwwebLFr@dpg-da43h8n10e5c73ao2r9g-a.oregon-postgres.render.com/adx_7a7z'
-#     )
-# }
+     'default': dj_database_url.parse(
+         'postgresql://adx_7a7z_user:gLFDEOlJ4RM1kzzpKOPSSPr1pwwebLFr@dpg-da43h8n10e5c73ao2r9g-a.oregon-postgres.render.com/adx_7a7z'
+     )
+ }
 
 
 # Password validation
